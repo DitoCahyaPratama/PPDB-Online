@@ -20,19 +20,30 @@ use Illuminate\Support\Facades\Route;
 
 //Admin Pages
 
-Route::get('/admin', function () {
-    return view('admin.layouts.admin');
+Route::prefix('/admin')->group(function () {
+    Route::get('/login', function () {
+        return view('admin.layouts.login');
+    });
+
+    Route::prefix('/userdata')->group(function () {
+        Route::get('/', [App\Http\Controllers\UserDataController::class, 'index'])->name('userdata.home');
+    });
+    Route::prefix('/studentdata')->group(function () {
+        Route::get('/', [App\Http\Controllers\StudentDataController::class, 'index'])->name('studentdata.home');
+    });
+    Route::prefix('/achievementdata')->group(function () {
+        Route::get('/', [App\Http\Controllers\AchievementDataController::class, 'index'])->name('achievementdata.home');
+    });
+    Route::prefix('/selectionhealths')->group(function () {
+        Route::get('/', [App\Http\Controllers\SelectionHealthsController::class, 'index'])->name('selectionhealths.home');
+    });
+
+    // Route::get('/', [KerjaController::class, 'myjob'])->name('user.jobsaya');
+    // Route::post('/store', [KerjaController::class, 'store']);
+    // Route::get('/get/{id}', [KerjaController::class, 'getById']);
+    // Route::delete('/delete/{id}',[KerjaController::class, 'delete']);
+    // Route::put('/update/{id}', [KerjaController::class, 'update']);
 });
-
-
-
-// Route::prefix('/jobsaya')->group(function () {
-//     Route::get('/', [KerjaController::class, 'myjob'])->name('user.jobsaya');
-//     Route::post('/store', [KerjaController::class, 'store']);
-//     Route::get('/get/{id}', [KerjaController::class, 'getById']);
-//     Route::delete('/delete/{id}',[KerjaController::class, 'delete']);
-//     Route::put('/update/{id}', [KerjaController::class, 'update']);
-// });
 
 
 Auth::routes();

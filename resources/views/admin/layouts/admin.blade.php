@@ -20,6 +20,9 @@
     <!-- Custom styles for this template-->
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
 
+    <!-- Custom styles for this page -->
+    <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -42,7 +45,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -57,25 +60,25 @@
             </div>
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item ">
-                <a class="nav-link" href="index.html">
+            <li class="nav-item {{Request::segment(2) == 'userdata' ? 'active' : null}} ">
+                <a class="nav-link" href="{{ route('userdata.home') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Data Akun User</span></a>
             </li>
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item ">
-                <a class="nav-link" href="index.html">
+            <li class="nav-item {{Request::segment(2) == 'studentdata' ? 'active' : null}}">
+                <a class="nav-link" href="{{route('studentdata.home')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Data Siswa</span></a>
+                    <span>Data Calon Siswa</span></a>
             </li>
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item ">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+            {{-- <!-- Nav Item - Dashboard -->
+            <li class="nav-item {{Request::segment(2) == 'achievementdata' ? 'active' : null}}">
+                <a class="nav-link" href="{{route('achievementdata.home')}}">
+                    <i class="fas fa-fw fa-star"></i>
                     <span>Data Prestasi</span></a>
-            </li>
+            </li> --}}
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -86,8 +89,8 @@
             </div>
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item ">
-                <a class="nav-link" href="index.html">
+            <li class="nav-item {{Request::segment(2) == 'selectionhealths' ? 'active' : null}}">
+                <a class="nav-link" href="{{route('selectionhealths.home')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Seleksi Data Kesehatan</span></a>
             </li>
@@ -242,113 +245,12 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Earnings (Monthly)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Earnings (Annual)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm mr-2">
-                                                        <div class="progress-bar bg-info" role="progressbar"
-                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Pending Requests</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Content Row -->
-
-                    <div class="row">
-
+            
                         <!-- Area Chart -->
-                        <div class="col-xl-12 col-lg-12">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    as
-                                </div>
-                            </div>
+                        <div>
+                            @yield('content')
                         </div>                      
-                    </div>
+            
                 </div>
                 <!-- /.container-fluid -->
 
@@ -405,6 +307,13 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{asset('js/datatables-demo.js')}}"></script>
 
 </body>
 
