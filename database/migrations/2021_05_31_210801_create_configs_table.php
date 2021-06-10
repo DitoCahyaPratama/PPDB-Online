@@ -17,8 +17,10 @@ class CreateConfigsTable extends Migration
             $table->id();
             $table->string('name_school');
             $table->text('address_school');
-            $table->date('date_registration_start');
-            $table->date('date_registration_end');
+            $table->date('date_registration_selection_achievement_start');
+            $table->date('date_registration_selection_achievement_end');
+            $table->date('date_registration_selection_report_start');
+            $table->date('date_registration_selection_report_end');
             $table->date('date_announcement_start');
             $table->date('date_announcement_end');
             $table->timestamps();

@@ -21,6 +21,8 @@ class CreateStudentsTable extends Migration
             $table->string('place_born');
             $table->string('date_born');
             $table->enum('gender',['laki-laki', 'perempuan']);
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('religion_id');
             $table->foreign('religion_id')->references('id')->on('religions');
             $table->char('village_id', 10);
