@@ -47,8 +47,8 @@
                                 @endif
                             </td>    
                             <td>
-                                <a href="{{route('selectionhealths.statusupdate',['id'=>$healthDatas->id,'status'=>1])}}" class="btn btn-success" onclick="return confirm('Terima surat kesehatan ?')">Terima</a>
-                                <a href="{{route('selectionhealths.statusupdate',['id'=>$healthDatas->id,'status'=>2])}}" class="btn btn-danger" onclick="return confirm('Tolak surat kesehatan ?')">Tolak</a>
+                                <a href="{{route('selectionhealths.statusupdate',['id'=>$healthDatas->id,'status'=>1])}}" class="btn btn-success @if ($healthDatas->status == 1 || $healthDatas->status == 2) disabled @endif" onclick="return confirm('Terima surat kesehatan ?')">Terima</a>
+                                <a href="{{route('selectionhealths.statusupdate',['id'=>$healthDatas->id,'status'=>2])}}" class="btn btn-danger @if ($healthDatas->status == 1 || $healthDatas->status == 2) disabled @endif" onclick="return confirm('Tolak surat kesehatan ?')">Tolak</a>
                             </td>
                         </tr>
                         @endforeach
