@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             IndoRegionSeeder::class,
             ReligionSeeder::class,
-            DepartmentSeeder::class
+            DepartmentSeeder::class,
+            UserSeeder::class
         ]);
     }
 }

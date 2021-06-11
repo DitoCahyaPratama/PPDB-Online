@@ -18,6 +18,7 @@ class CreateHealthsTable extends Migration
             $table->unsignedBigInteger('student_id');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade')->onUpdate('cascade');
             $table->string('photo');
+            $table->integer('status');
             $table->timestamps();
         });
     }

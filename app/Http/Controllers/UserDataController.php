@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use DB;
 
 class UserDataController extends Controller
 {
@@ -13,7 +15,8 @@ class UserDataController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.user_data_pages');
+        $userData=User::where('role','=',2)->get();
+        return view('admin.pages.user_data_pages',compact('userData'));
     }
 
     /**
@@ -78,7 +81,17 @@ class UserDataController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {   
+        try {
+            DB::table('users')->where('id','=',$id)->delete();
+            return redirect()->route('userdata.home')->with([
+                'successful_message' => 'Data telah dihapus',
+            ]);
+        } catch (\Throwable $th) {
+            return redirect()->route('userdata.home')->with([
+                'failed_message' => $th->getMessage(),
+            ]);;
+        }
+        
     }
 }

@@ -106,6 +106,8 @@
                         <h6 class="collapse-header">Jurusan</h6>
                         <a class="collapse-item" href="login.html">RPL</a>
                         <a class="collapse-item" href="register.html">TKJ</a>
+                        <a class="collapse-item" href="register.html">TM</a>
+                        <a class="collapse-item" href="register.html">TEI</a>
                     </div>
                 </div>
             </li>
@@ -122,6 +124,8 @@
                         <h6 class="collapse-header">Jurusan</h6>
                         <a class="collapse-item" href="login.html">RPL</a>
                         <a class="collapse-item" href="register.html">TKJ</a>
+                        <a class="collapse-item" href="register.html">TM</a>
+                        <a class="collapse-item" href="register.html">TEI</a>
                     </div>
                 </div>
             </li>
@@ -258,10 +262,10 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
+            <footer class="sticky-footer bg-primary">
                 <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                    <div class="copyright text-center my-auto text-white">
+                        <span>Copyright &copy; Kelompok Dito & Farhan 2021</span>
                     </div>
                 </div>
             </footer>

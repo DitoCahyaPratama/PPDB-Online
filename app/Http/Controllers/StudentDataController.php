@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Student;
+use DB;
 
 class StudentDataController extends Controller
 {
@@ -13,7 +15,8 @@ class StudentDataController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.student_data_pages');
+        $studentData=Student::all();
+        return view('admin.pages.student_data_pages',compact('studentData'));
     }
 
     /**
@@ -45,7 +48,21 @@ class StudentDataController extends Controller
      */
     public function show($id)
     {
-        //
+        $studentData=DB::table('students')
+        ->select('students.*',
+        'religions.name AS nameReligion',
+        'provinces.name AS nameProvinces',
+        'regencies.name AS nameRegencies',
+        'districts.name AS nameDistricts',
+        'villages.name AS nameVillages')
+        ->join('religions','religions.id','=','students.religion_id') 
+        ->join('provinces','provinces.id','=','students.province_id')
+        ->join('regencies','regencies.id','=','students.regency_id')
+        ->join('districts','districts.id','=','students.district_id')
+        ->join('villages','villages.id','=','students.village_id')
+        ->first();
+
+        return view('admin.pages.student_detail_data_pages',compact('studentData'));
     }
 
     /**
