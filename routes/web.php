@@ -41,6 +41,11 @@ Route::prefix('/admin')->group(function () {
         Route::get('/statusupdate/{id}/{status}', [App\Http\Controllers\SelectionHealthsController::class, 'update'])->name('selectionhealths.statusupdate');
     });
 
+    Route::prefix('/selectionreports')->group(function () {
+        Route::get('/{departementId}', [App\Http\Controllers\SelectionReportsController::class, 'index'])->name('selectionreports.home');
+        // Route::get('/statusupdate/{id}/{status}', [App\Http\Controllers\SelectionHealthsController::class, 'update'])->name('selectionhealths.statusupdate');
+    });
+
     // Route::get('/', [KerjaController::class, 'myjob'])->name('user.jobsaya');
     // Route::post('/store', [KerjaController::class, 'store']);
     // Route::get('/get/{id}', [KerjaController::class, 'getById']);

@@ -113,7 +113,7 @@
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
+            <li class="nav-item {{Request::segment(2) == 'selectionreports' ? 'active' : null}}">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
@@ -122,10 +122,10 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Jurusan</h6>
-                        <a class="collapse-item" href="login.html">RPL</a>
-                        <a class="collapse-item" href="register.html">TKJ</a>
-                        <a class="collapse-item" href="register.html">TM</a>
-                        <a class="collapse-item" href="register.html">TEI</a>
+                        <a class="collapse-item" href="{{route('selectionreports.home',['departementId'=>1])}}">RPL</a>
+                        <a class="collapse-item" href="{{route('selectionreports.home',['departementId'=>2])}}">TKJ</a>
+                        <a class="collapse-item" href="{{route('selectionreports.home',['departementId'=>3])}}">TM</a>
+                        <a class="collapse-item" href="{{route('selectionreports.home',['departementId'=>4])}}">TEI</a>
                     </div>
                 </div>
             </li>
