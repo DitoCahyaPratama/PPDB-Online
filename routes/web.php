@@ -23,7 +23,9 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/admin')->group(function () {
 
     Route::get('/login', [App\Http\Controllers\Auth\CheckLoginController::class, 'checkLoginAdmin']);
-
+    Route::prefix('/dashboard')->group(function () {
+        Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.home');
+    });
     Route::prefix('/userdata')->group(function () {
         Route::get('/', [App\Http\Controllers\UserDataController::class, 'index'])->name('userdata.home');
         Route::get('/delete/{id}', [App\Http\Controllers\UserDataController::class, 'destroy'])->name('userdata.delete');
