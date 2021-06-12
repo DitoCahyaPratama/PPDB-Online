@@ -104,8 +104,8 @@
                 <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Jurusan</h6>
-                        <a class="collapse-item" href="login.html">RPL</a>
-                        <a class="collapse-item" href="register.html">TKJ</a>
+                        <a class="collapse-item" href="login.html">TKJ</a>
+                        <a class="collapse-item" href="register.html">RPL</a>
                         <a class="collapse-item" href="register.html">TM</a>
                         <a class="collapse-item" href="register.html">TEI</a>
                     </div>
@@ -122,8 +122,8 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Jurusan</h6>
-                        <a class="collapse-item" href="{{route('selectionreports.home',['departementId'=>1])}}">RPL</a>
-                        <a class="collapse-item" href="{{route('selectionreports.home',['departementId'=>2])}}">TKJ</a>
+                        <a class="collapse-item" href="{{route('selectionreports.home',['departementId'=>1])}}">TKJ</a>
+                        <a class="collapse-item" href="{{route('selectionreports.home',['departementId'=>2])}}">RPL</a>
                         <a class="collapse-item" href="{{route('selectionreports.home',['departementId'=>3])}}">TM</a>
                         <a class="collapse-item" href="{{route('selectionreports.home',['departementId'=>4])}}">TEI</a>
                     </div>

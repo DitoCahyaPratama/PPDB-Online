@@ -7,5 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Report extends Model
 {
-    use HasFactory;
+    protected $table='reports';
+    protected $fillable = [
+        'student_id',
+        'agama',
+        'pkn',
+        'bi',
+        'mtk',
+        'ipa',
+        'ips',
+        'bing'
+    ];
 }

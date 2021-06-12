@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SelectionReport;
 use Illuminate\Http\Request;
+use DB;
 
 class SelectionReportsController extends Controller
 {
@@ -16,16 +17,24 @@ class SelectionReportsController extends Controller
     {   
         $departement;
         if ($depId == 1) {
-            $departement = 'RPL';
-        }else if ($depId == 2) {
             $departement = 'TKJ';
+        }else if ($depId == 2) {
+            $departement = 'RPL';
         }elseif ($depId == 3) {
             $departement = 'TM';
         }else {
             $departement = 'TEI';
         }
-        
-        return view('admin.pages.selection_report_pages',compact('departement'));
+        $reportData=DB::table('selection_reports')
+        ->select('selection_reports.*','reports.*','students.name AS nameStudents')
+        ->join('reports','reports.id','=','selection_reports.report_id')
+        ->join('students','students.id','=','reports.student_id')
+        ->where('department_id','=',$depId)
+        ->orderBy('avg','desc')
+        ->limit(50)
+        ->get();
+        $countStudents=SelectionReport::where('department_id','=',$depId)->count();
+        return view('admin.pages.selection_report_pages',compact('departement','reportData','countStudents'));
     }
 
     /**

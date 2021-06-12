@@ -17,6 +17,9 @@
             <h6 class="m-0 font-weight-bold text-primary">Seleksi Jalur Raport Jurusan {{$departement}}</h6>
         </div>
         <div class="card-body">
+            <h6>Tanggal Hari Ini : {{ date('d M Y') }}</h6>
+            <h6>Jumlah Pendaftar : {{ $countStudents }}</h6>
+            <hr>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -29,27 +32,24 @@
                             <th>IPA</th>
                             <th>IPS</th>
                             <th>Rata-Rata</th>
-                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @php
                         $no=1;
                     @endphp
-                    {{-- @foreach ($studentData as $studentDatas)
+                    @foreach ($reportData as $reportDatas)
                     <tr>
                         <td>{{ $no++ }}</td>    
-                        <td>{{ $studentDatas->name }}</td>    
-                        <td>{{ $studentDatas->nik }}</td>      
-                        <td>{{ $studentDatas->gender }}</td>      
-                        <td>{{ $studentDatas->phone_number }}</td>      
-                        <td><img src="{{ $studentDatas->phone_number }}" class="img-fluid"></td>    
-                        <td>
-                            <a href="{{route('studentdata.detail',['id'=>$studentDatas->id])}}" class="btn btn-success">Detail</a>
-                            {{-- <a href="{{route('userdata.delete',['id'=>$studentDatas->id])}}" class="btn btn-danger" onclick="return confirm('hapus data user yang anda pilih?')">Hapus</a> --}}
-                        {{-- </td>
-                    </tr> --}}
-                    {{-- @endforeach  --}}
+                        <td>{{ $reportDatas->nameStudents }}</td>    
+                        <td>{{ $reportDatas->agama }}</td>      
+                        <td>{{ $reportDatas->pkn }}</td>      
+                        <td>{{ $reportDatas->bi }}</td>      
+                        <td>{{ $reportDatas->ipa }}</td>
+                        <td>{{ $reportDatas->ips }}</td>
+                        <td>{{ $reportDatas->avg }}</td>
+                    </tr>
+                    @endforeach 
                     </tbody>
                 </table>
             </div>
@@ -57,3 +57,4 @@
 
     </div>
 @endsection
+
