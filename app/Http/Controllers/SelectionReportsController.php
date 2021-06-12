@@ -17,13 +17,13 @@ class SelectionReportsController extends Controller
     {   
         $departement;
         if ($depId == 1) {
-            $departement = 'TKJ';
+            $departement = 'Teknik Komputer Jaringan';
         }else if ($depId == 2) {
-            $departement = 'RPL';
+            $departement = 'Rekayasa Perangkat Lunak';
         }elseif ($depId == 3) {
-            $departement = 'TM';
+            $departement = 'Teknik Mekatronika';
         }else {
-            $departement = 'TEI';
+            $departement = 'Teknik Elektronika Industri';
         }
         $reportData=DB::table('selection_reports')
         ->select('selection_reports.*','reports.*','students.name AS nameStudents')

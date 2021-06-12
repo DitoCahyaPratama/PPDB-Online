@@ -21,7 +21,7 @@
             <h6>Jumlah Pendaftar : {{ $countStudents }}</h6>
             <hr>
             <div class="table-responsive">
-                <table class="table table-bordered" width="100%" cellspacing="0">
+                <table id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>No</th>
