@@ -21,9 +21,8 @@ use Illuminate\Support\Facades\Route;
 //Admin Pages
 
 Route::prefix('/admin')->group(function () {
-    Route::get('/login', function () {
-        return view('admin.layouts.login');
-    });
+
+    Route::get('/login', [App\Http\Controllers\Auth\CheckLoginController::class, 'checkLoginAdmin']);
 
     Route::prefix('/userdata')->group(function () {
         Route::get('/', [App\Http\Controllers\UserDataController::class, 'index'])->name('userdata.home');
@@ -52,8 +51,9 @@ Route::prefix('/admin')->group(function () {
     // Route::delete('/delete/{id}',[KerjaController::class, 'delete']);
     // Route::put('/update/{id}', [KerjaController::class, 'update']);
 });
-
+Route::get('/logoutAdmin',[App\Http\Controllers\Auth\LogoutController::class, 'logoutAdmin']);
 
 Auth::routes();
 Route::get('/', [App\Http\Controllers\PublicController::class, 'index'])->name('public');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
