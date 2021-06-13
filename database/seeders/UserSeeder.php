@@ -15,13 +15,13 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $religion = [
+        $user = [
             ['name' => 'admin','email'=>'admin@gmail.com','password'=>Hash::make('admin'),'role'=>1],
             ['name' => 'testing account','email'=>'test@gmail.com','password'=>Hash::make('test'),'role'=>2],
             ['name' => 'testing account2','email'=>'test2@gmail.com','password'=>Hash::make('test2'),'role'=>2],
         ];
 
-        DB::table('users')->insert($religion);
+        DB::table('users')->insert($user);
     }
 }
 

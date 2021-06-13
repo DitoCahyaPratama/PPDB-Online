@@ -56,7 +56,20 @@
                                     </li>
                                 </ul>
                             @else
-
+                                <ul>
+                                    <li>
+                                        <a class="login-btn-area" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();" id="login-button"><i class="fa fa-lock" aria-hidden="true"></i> Logout</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <div class="apply-btn-area">
+                                            <a href="{{ route('dashboard.student') }}" class="apply-now-btn">Dashboard</a>
+                                        </div>
+                                    </li>
+                                </ul>
                             @endguest
                         </div>
                     </div>
