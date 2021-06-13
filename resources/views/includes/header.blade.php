@@ -14,49 +14,50 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="header-top-right">
-                            <ul>
-                                <li>
-                                    <a class="login-btn-area" href="#" id="login-button"><i class="fa fa-lock" aria-hidden="true"></i> Masuk</a>
-                                    <div class="login-form" id="login-form" style="display: none;">
-                                        <div class="title-default-left-bold">Login</div>
-                                        <form method="POST" action="{{ route('login') }}">
-                                            @csrf
-                                            <label>Email address *</label>
-                                            <input type="email" placeholder="E-mail" name="email" value="{{ old('email') }}" required autocomplete="email" />
-                                            @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                            <label>Password *</label>
-                                            <input type="password" placeholder="Password" name="password" required autocomplete="current-password" />
-                                            @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                            @if (Route::has('password.request'))
-                                                <label class="check">
-                                                    <a href="{{ route('password.request') }}">
-                                                        {{ __('Forgot Your Password?') }}
-                                                    </a>
-                                                </label>
-                                            @endif
-                                            <span><input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}/>Remember Me</span>
-                                            <button class="default-big-btn" type="submit" value="Login">Login</button>
-                                            <button class="default-big-btn form-cancel" type="submit" value="">Cancel</button>
-                                        </form>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a class="login-btn-area" href="{{ route('register') }}" id="login-button"><i class="fa fa-lock" aria-hidden="true"></i> Daftar</a>
-                                </li>
-                                <li>
-                                    <div class="apply-btn-area">
-                                        <a href="#" class="apply-now-btn">Apply Now</a>
-                                    </div>
-                                </li>
-                            </ul>
+                            @guest
+                                <ul>
+                                    <li>
+                                        <a class="login-btn-area" href="#" id="login-button"><i class="fa fa-lock" aria-hidden="true"></i> Masuk</a>
+                                        <div class="login-form" id="login-form" style="display: none;">
+                                            <div class="title-default-left-bold">Login</div>
+                                            <form method="POST" action="{{ route('login') }}">
+                                                @csrf
+                                                <label>Email address *</label>
+                                                <input type="email" placeholder="E-mail" name="email" value="{{ old('email') }}" required autocomplete="email" />
+                                                @error('email')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                <label>Password *</label>
+                                                <input type="password" placeholder="Password" name="password" required autocomplete="current-password" />
+                                                @error('password')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                @if (Route::has('password.request'))
+                                                    <label class="check">
+                                                        <a href="{{ route('password.request') }}">
+                                                            {{ __('Forgot Your Password?') }}
+                                                        </a>
+                                                    </label>
+                                                @endif
+                                                <span><input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}/>Remember Me</span>
+                                                <button class="default-big-btn" type="submit" value="Login">Login</button>
+                                                <button class="default-big-btn form-cancel" type="submit" value="">Cancel</button>
+                                            </form>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="apply-btn-area">
+                                            <a href="{{ route('register') }}" class="apply-now-btn">Apply Now</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            @else
+
+                            @endguest
                         </div>
                     </div>
                 </div>
