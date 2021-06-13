@@ -16,8 +16,8 @@ class InitiateConfigSeeder extends Seeder
     {
         $religion = [
             [
-                'name_school' => 'SMK Teknologi Indonesia',
-                'address_school' => 'Jl.Malabar no 17',
+                'name_school' => 'Nama Sekolah',
+                'address_school' => 'Alamat sekolah',
                 'date_registration_selection_health_start' => '2021-06-13',
                 'date_registration_selection_health_end' => '2021-06-13',
                 'date_registration_selection_achievement_start' => '2021-06-13',

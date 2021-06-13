@@ -57,6 +57,7 @@ Route::group(['middleware' => 'auth'], function(){
             });
             Route::prefix('/config')->group(function () {
                 Route::get('/', [App\Http\Controllers\ConfigController::class, 'index'])->name('config.home');
+                Route::put('/update', [App\Http\Controllers\ConfigController::class, 'update'])->name('config.update');
             });
             // Route::get('/', [KerjaController::class, 'myjob'])->name('user.jobsaya');
             // Route::post('/store', [KerjaController::class, 'store']);
