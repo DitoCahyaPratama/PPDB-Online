@@ -25,6 +25,10 @@ Route::prefix('/admin')->group(function () {
     Route::get('/login', [App\Http\Controllers\Auth\CheckLoginController::class, 'checkLoginAdmin']);
 });
 
+//Route::get('/student', function () {
+//    echo "test";
+//});
+
 Route::group(['middleware' => 'auth'], function(){
     Route::group(['middleware' => 'role:1'], function() {
         Route::prefix('/admin')->group(function () {
@@ -63,8 +67,10 @@ Route::group(['middleware' => 'auth'], function(){
     Route::group(['middleware' => 'role:2'], function() {
         Route::prefix('/student')->group(function () {
             Route::prefix('/dashboard')->group(function () {
-                Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.student');
+                Route::get('/', [App\Http\Controllers\DashboardController::class, 'student'])->name('dashboard.student');
             });
+            Route::get('/bukti_penerimaan', [App\Http\Controllers\StudentController::class, 'bukti_penerimaan'])->name('bukti.penerimaan');
+            Route::get('/bukti_pendaftaran', [App\Http\Controllers\StudentController::class, 'bukti_pendaftaran'])->name('bukti.pendaftaran');
         });
     });
 });
@@ -88,6 +94,5 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 Route::get('/', [App\Http\Controllers\PublicController::class, 'index'])->name('public');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-
+Route::get('/info', [App\Http\Controllers\InfoController::class, 'index'])->name('info');
+Route::get('/contact', [App\Http\Controllers\ContactController::class, 'index'])->name('contact');

@@ -82,4 +82,12 @@ class StudentController extends Controller
     {
         //
     }
+
+    public function cetak_pendaftaran(){
+
+    }
+
+    public function cetak_penerimaan(){
+
+    }
 }

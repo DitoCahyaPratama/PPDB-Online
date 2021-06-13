@@ -14,8 +14,8 @@ class SelectionReportsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index($depId)
-    {   
-        $departement;
+    {
+        $departement = "";
         if ($depId == 1) {
             $departement = 'Teknik Komputer Jaringan';
         }else if ($depId == 2) {
