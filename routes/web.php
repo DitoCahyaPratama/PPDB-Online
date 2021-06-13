@@ -25,9 +25,9 @@ Route::prefix('/admin')->group(function () {
     Route::get('/login', [App\Http\Controllers\Auth\CheckLoginController::class, 'checkLoginAdmin']);
 });
 
-//Route::get('/student', function () {
+// Route::get('/student', function () {
 //    echo "test";
-//});
+// });
 
 Route::group(['middleware' => 'auth'], function(){
     Route::group(['middleware' => 'role:1'], function() {
@@ -55,7 +55,9 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('/{departementId}', [App\Http\Controllers\SelectionReportsController::class, 'index'])->name('selectionreports.home');
                 // Route::get('/statusupdate/{id}/{status}', [App\Http\Controllers\SelectionHealthsController::class, 'update'])->name('selectionhealths.statusupdate');
             });
-
+            Route::prefix('/config')->group(function () {
+                Route::get('/', [App\Http\Controllers\ConfigController::class, 'index'])->name('config.home');
+            });
             // Route::get('/', [KerjaController::class, 'myjob'])->name('user.jobsaya');
             // Route::post('/store', [KerjaController::class, 'store']);
             // Route::get('/get/{id}', [KerjaController::class, 'getById']);

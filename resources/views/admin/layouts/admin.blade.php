@@ -138,8 +138,8 @@
                 Lainnya
             </div>
 
-            <li class="nav-item ">
-                <a class="nav-link" href="index.html">
+            <li class="nav-item {{Request::segment(2) == 'config' ? 'active' : null}}">
+                <a class="nav-link" href="{{route('config.home')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Konfigurasi</span></a>
             </li>

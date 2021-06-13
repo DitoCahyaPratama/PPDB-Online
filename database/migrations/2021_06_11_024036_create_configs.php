@@ -17,12 +17,16 @@ class CreateConfigs extends Migration
             $table->id();
             $table->string('name_school');
             $table->text('address_school');
+            $table->date('date_registration_selection_health_start');
+            $table->date('date_registration_selection_health_end');
             $table->date('date_registration_selection_achievement_start');
             $table->date('date_registration_selection_achievement_end');
             $table->date('date_registration_selection_report_start');
             $table->date('date_registration_selection_report_end');
-            $table->date('date_announcement_start');
-            $table->date('date_announcement_end');
+            $table->date('date_announcement_achievement_start');
+            $table->date('date_announcement_achievement_end');
+            $table->date('date_announcement_report_start');
+            $table->date('date_announcement_report_end');
             $table->timestamps();
         });
     }
