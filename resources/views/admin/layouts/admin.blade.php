@@ -95,7 +95,7 @@
                     <span>Seleksi Data Kesehatan</span></a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item {{Request::segment(2) == 'selectionachievements' ? 'active' : null}}">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
@@ -104,10 +104,10 @@
                 <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Jurusan</h6>
-                        <a class="collapse-item" href="login.html">TKJ</a>
-                        <a class="collapse-item" href="register.html">RPL</a>
-                        <a class="collapse-item" href="register.html">TM</a>
-                        <a class="collapse-item" href="register.html">TEI</a>
+                        <a class="collapse-item" href="{{route('selectionachievement.home',['departementId'=>1])}}">TKJ</a>
+                        <a class="collapse-item" href="{{route('selectionachievement.home',['departementId'=>2])}}">RPL</a>
+                        <a class="collapse-item" href="{{route('selectionachievement.home',['departementId'=>3])}}">TM</a>
+                        <a class="collapse-item" href="{{route('selectionachievement.home',['departementId'=>4])}}">TEI</a>
                     </div>
                 </div>
             </li>

@@ -43,14 +43,14 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('/', [App\Http\Controllers\StudentDataController::class, 'index'])->name('studentdata.home');
                 Route::get('/detail/{id}', [App\Http\Controllers\StudentDataController::class, 'show'])->name('studentdata.detail');
             });
-            Route::prefix('/achievementdata')->group(function () {
-                Route::get('/', [App\Http\Controllers\AchievementDataController::class, 'index'])->name('achievementdata.home');
-            });
             Route::prefix('/selectionhealths')->group(function () {
                 Route::get('/', [App\Http\Controllers\SelectionHealthsController::class, 'index'])->name('selectionhealths.home');
                 Route::get('/statusupdate/{id}/{status}', [App\Http\Controllers\SelectionHealthsController::class, 'update'])->name('selectionhealths.statusupdate');
             });
-
+            Route::prefix('/selectionachievements')->group(function () {
+                Route::get('/{departementId}', [App\Http\Controllers\SelectionAchievementsController::class, 'index'])->name('selectionachievement.home');
+                Route::get('/statusupdate/{id}/{departementId}/{status}', [App\Http\Controllers\SelectionAchievementsController::class, 'update'])->name('selectionachievement.statusupdate');
+            });
             Route::prefix('/selectionreports')->group(function () {
                 Route::get('/{departementId}', [App\Http\Controllers\SelectionReportsController::class, 'index'])->name('selectionreports.home');
                 // Route::get('/statusupdate/{id}/{status}', [App\Http\Controllers\SelectionHealthsController::class, 'update'])->name('selectionhealths.statusupdate');
