@@ -70,7 +70,20 @@ class SelectionAchievementsController extends Controller
      */
     public function show($id)
     {
-        //
+        $achievData=DB::table('selection_achievements')
+        ->select(
+        'selection_achievements.*',
+        'achievements1.name AS achievements1','achievements1.photo AS achievementsPhoto1',
+        'achievements2.name AS achievements2','achievements2.photo AS achievementsPhoto2',
+        'achievements3.name AS achievements3','achievements3.photo AS achievementsPhoto3',
+        'students.name AS nameStudents')
+        ->join('achievements AS achievements1','achievements1.id','=','selection_achievements.achievement_id_1')
+        ->join('achievements AS achievements2','achievements2.id','=','selection_achievements.achievement_id_2')
+        ->join('achievements AS achievements3','achievements3.id','=','selection_achievements.achievement_id_3')
+        ->join('students','students.id','=','selection_achievements.student_id')
+        ->where('selection_achievements.id','=',$id)
+        ->first();
+        return view('admin.pages.selection_detail_achievement_pages',compact('achievData'));
     }
 
     /**

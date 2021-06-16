@@ -51,7 +51,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-warning">Detail</a>
+                                    <a href="{{route('selectionachievement.detail',['id'=>$achievDatas->id])}}" class="btn btn-warning">Detail</a>
                                     <a href="{{route('selectionachievement.statusupdate',['id'=>$achievDatas->id,'departementId'=>$achievDatas->department_id,'status'=>1])}}" class="btn btn-success @if ($achievDatas->status == 1 || $achievDatas->status == 2) disabled @endif">Lolos</a>
                                     <a href="{{route('selectionachievement.statusupdate',['id'=>$achievDatas->id,'departementId'=>$achievDatas->department_id,'status'=>2])}}" class="btn btn-danger @if ($achievDatas->status == 1 || $achievDatas->status == 2) disabled @endif">Tolak</a>
                                 </td>

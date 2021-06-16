@@ -49,6 +49,7 @@ Route::group(['middleware' => 'auth'], function(){
             });
             Route::prefix('/selectionachievements')->group(function () {
                 Route::get('/{departementId}', [App\Http\Controllers\SelectionAchievementsController::class, 'index'])->name('selectionachievement.home');
+                Route::get('/detail/{id}', [App\Http\Controllers\SelectionAchievementsController::class, 'show'])->name('selectionachievement.detail');
                 Route::get('/statusupdate/{id}/{departementId}/{status}', [App\Http\Controllers\SelectionAchievementsController::class, 'update'])->name('selectionachievement.statusupdate');
             });
             Route::prefix('/selectionreports')->group(function () {
