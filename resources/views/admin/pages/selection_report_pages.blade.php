@@ -19,6 +19,13 @@
         <div class="card-body">
             <h6>Tanggal Hari Ini : {{ date('d M Y') }}</h6>
             <h6>Jumlah Pendaftar : {{ $countStudents }}</h6>
+            @if (date('Y-m-d') >= $configData->date_registration_selection_report_end)
+            <div class="alert alert-info">
+                <span>Seleksi telah berakhir, silahkan untuk menekan tombol berikut untuk memfinalisasi seleksi data jurusan {{$departement}}</span>
+                <br>
+                <a href="{{route('selectionreports.finalization',['departementId'=>$depId,'status'=>1])}}" class="btn btn-info @if ($countFinalization == 50) disabled @endif">Finalisasi Data</a>
+            </div>
+            @endif
             <hr>
             <div class="table-responsive">
                 <table id="dataTable" class="table table-bordered" width="100%" cellspacing="0">

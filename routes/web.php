@@ -54,7 +54,7 @@ Route::group(['middleware' => 'auth'], function(){
             });
             Route::prefix('/selectionreports')->group(function () {
                 Route::get('/{departementId}', [App\Http\Controllers\SelectionReportsController::class, 'index'])->name('selectionreports.home');
-                // Route::get('/statusupdate/{id}/{status}', [App\Http\Controllers\SelectionHealthsController::class, 'update'])->name('selectionhealths.statusupdate');
+                Route::get('/finalization/{departementId}/{status}', [App\Http\Controllers\SelectionReportsController::class, 'update'])->name('selectionreports.finalization');
             });
             Route::prefix('/config')->group(function () {
                 Route::get('/', [App\Http\Controllers\ConfigController::class, 'index'])->name('config.home');
