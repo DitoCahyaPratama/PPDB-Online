@@ -25,10 +25,6 @@ Route::prefix('/admin')->group(function () {
     Route::get('/login', [App\Http\Controllers\Auth\CheckLoginController::class, 'checkLoginAdmin']);
 });
 
-//Route::get('/student', function () {
-//    echo "test";
-//});
-
 Route::group(['middleware' => 'auth'], function(){
     Route::group(['middleware' => 'role:1'], function() {
         Route::prefix('/admin')->group(function () {
@@ -65,7 +61,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/logoutAdmin',[App\Http\Controllers\Auth\LogoutController::class, 'logoutAdmin']);
     });
     Route::group(['middleware' => 'role:2'], function() {
-        Route::prefix('/student')->group(function () {
+        Route::prefix('/students')->group(function () {
             Route::prefix('/dashboard')->group(function () {
                 Route::get('/', [App\Http\Controllers\DashboardController::class, 'student'])->name('dashboard.student');
             });
@@ -76,6 +72,7 @@ Route::group(['middleware' => 'auth'], function(){
 });
 
 Auth::routes();
+
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');

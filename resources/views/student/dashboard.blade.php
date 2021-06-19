@@ -52,18 +52,18 @@
                                 <h5><span class="badge badge-warning">1</span> Biodata</h5>
                                 <p>Mengisi/melengkapi biodata pendaftar bidikmisi</p>
                                 <small><i>wajib diisi</i></small>
-                                <?php
-                                $query = _run("SELECT * FROM biographies WHERE user_id='".$id."' AND nisn IS NOT NULL AND nama IS NOT NULL AND nik IS NOT NULL AND tempat_lahir IS NOT NULL AND tanggal_lahir IS NOT NULL AND jk IS NOT NULL AND tb IS NOT NULL AND bb IS NOT NULL AND religion_id IS NOT NULL AND alamat IS NOT NULL AND kebangsaan IS NOT NULL AND province_id IS NOT NULL AND regency_id IS NOT NULL AND district_id IS NOT NULL AND village_id IS NOT NULL AND email IS NOT NULL AND no_hp IS NOT NULL AND photo IS NOT NULL AND nisn != '' AND nama != '' AND nik != '' AND tempat_lahir != '' AND tanggal_lahir != '' AND jk != '' AND tb != '' AND bb != '' AND religion_id != '' AND alamat != '' AND kebangsaan != '' AND province_id != '' AND regency_id != '' AND district_id != '' AND village_id != '' AND email != '' AND no_hp != '' AND photo != ''");
-                                $row = _num($query);
-                                if($row == 1){
-                                ?>
+<!--                                --><?php
+//                                $query = _run("SELECT * FROM biographies WHERE user_id='".$id."' AND nisn IS NOT NULL AND nama IS NOT NULL AND nik IS NOT NULL AND tempat_lahir IS NOT NULL AND tanggal_lahir IS NOT NULL AND jk IS NOT NULL AND tb IS NOT NULL AND bb IS NOT NULL AND religion_id IS NOT NULL AND alamat IS NOT NULL AND kebangsaan IS NOT NULL AND province_id IS NOT NULL AND regency_id IS NOT NULL AND district_id IS NOT NULL AND village_id IS NOT NULL AND email IS NOT NULL AND no_hp IS NOT NULL AND photo IS NOT NULL AND nisn != '' AND nama != '' AND nik != '' AND tempat_lahir != '' AND tanggal_lahir != '' AND jk != '' AND tb != '' AND bb != '' AND religion_id != '' AND alamat != '' AND kebangsaan != '' AND province_id != '' AND regency_id != '' AND district_id != '' AND village_id != '' AND email != '' AND no_hp != '' AND photo != ''");
+//                                $row = _num($query);
+//                                if($row == 1){
+//                                ?>
                                 <span class="badge badge-success">Data sudah lengkap</span>
                                 <?php
-                                }else{
+//                                }else{
                                 ?>
                                 <span class="badge badge-warning">Data belum lengkap</span>
                                 <?php
-                                }
+//                                }
                                 ?>
                             </div>
                         </a>
@@ -73,17 +73,17 @@
                                 <p>Mengisi data kondisi ekonomi keluarga mahasiswa baru</p>
                                 <small><i>wajib diisi</i></small>
                                 <?php
-                                $query = _run("SELECT * FROM economies WHERE user_id='".$id."' AND penghasilan_ayah IS NOT NULL AND penghasilan_ibu IS NOT NULL AND hutang IS NOT NULL AND cicilan_hutang IS NOT NULL AND piutang IS NOT NULL AND cicilan_piutang IS NOT NULL AND tabungan_keluarga IS NOT NULL AND penghasilan_ayah != '' AND penghasilan_ibu != ''");
-                                $row = _num($query);
-                                if($row == 1){
+//                                $query = _run("SELECT * FROM economies WHERE user_id='".$id."' AND penghasilan_ayah IS NOT NULL AND penghasilan_ibu IS NOT NULL AND hutang IS NOT NULL AND cicilan_hutang IS NOT NULL AND piutang IS NOT NULL AND cicilan_piutang IS NOT NULL AND tabungan_keluarga IS NOT NULL AND penghasilan_ayah != '' AND penghasilan_ibu != ''");
+//                                $row = _num($query);
+//                                if($row == 1){
                                 ?>
                                 <span class="badge badge-success">Data sudah lengkap</span>
                                 <?php
-                                }else{
+//                                }else{
                                 ?>
                                 <span class="badge badge-warning">Data belum lengkap</span>
                                 <?php
-                                }
+//                                }
                                 ?>
                             </div>
                         </a>
@@ -93,17 +93,17 @@
                                 <p>Mengisi data keluarga pendaftar (ayah/ibu/wali)</p>
                                 <small><i>wajib diisi</i></small>
                                 <?php
-                                $query = _run("SELECT * FROM families WHERE user_id='".$id."' AND nama_ayah IS NOT NULL AND status_ayah IS NOT NULL AND hubungan_ayah IS NOT NULL AND pendidikan_ayah IS NOT NULL AND pekerjaan_ayah IS NOT NULL AND detil_ayah IS NOT NULL AND nama_ibu IS NOT NULL AND status_ibu IS NOT NULL AND hubungan_ibu IS NOT NULL AND pendidikan_ibu IS NOT NULL AND pekerjaan_ibu IS NOT NULL AND detil_ibu IS NOT NULL AND jumlah_tanggungan IS NOT NULL AND no_ortu IS NOT NULL AND photo IS NOT NULL AND nama_ayah != '' AND status_ayah != '' AND hubungan_ayah != '' AND pendidikan_ayah != '' AND pekerjaan_ayah != '' AND detil_ayah != '' AND nama_ibu != '' AND status_ibu != '' AND hubungan_ibu != '' AND pendidikan_ibu != '' AND pekerjaan_ibu != '' AND detil_ibu != '' AND jumlah_tanggungan != '' AND no_ortu != '' AND photo != ''");
-                                $row = _num($query);
-                                if($row == 1){
+//                                $query = _run("SELECT * FROM families WHERE user_id='".$id."' AND nama_ayah IS NOT NULL AND status_ayah IS NOT NULL AND hubungan_ayah IS NOT NULL AND pendidikan_ayah IS NOT NULL AND pekerjaan_ayah IS NOT NULL AND detil_ayah IS NOT NULL AND nama_ibu IS NOT NULL AND status_ibu IS NOT NULL AND hubungan_ibu IS NOT NULL AND pendidikan_ibu IS NOT NULL AND pekerjaan_ibu IS NOT NULL AND detil_ibu IS NOT NULL AND jumlah_tanggungan IS NOT NULL AND no_ortu IS NOT NULL AND photo IS NOT NULL AND nama_ayah != '' AND status_ayah != '' AND hubungan_ayah != '' AND pendidikan_ayah != '' AND pekerjaan_ayah != '' AND detil_ayah != '' AND nama_ibu != '' AND status_ibu != '' AND hubungan_ibu != '' AND pendidikan_ibu != '' AND pekerjaan_ibu != '' AND detil_ibu != '' AND jumlah_tanggungan != '' AND no_ortu != '' AND photo != ''");
+//                                $row = _num($query);
+//                                if($row == 1){
                                 ?>
                                 <span class="badge badge-success">Data sudah lengkap</span>
                                 <?php
-                                }else{
+//                                }else{
                                 ?>
                                 <span class="badge badge-warning">Data belum lengkap</span>
                                 <?php
-                                }
+//                                }
                                 ?>
                             </div>
                         </a>
@@ -122,17 +122,17 @@
                                 <p>Mengisi data sekolah asal pendaftar mahasiswa</p>
                                 <small><i>wajib diisi</i></small>
                                 <?php
-                                $query = _run("SELECT * FROM educations WHERE user_id='".$id."' AND name IS NOT NULL AND address IS NOT NULL AND tahun_lulus IS NOT NULL AND province_id IS NOT NULL AND regency_id IS NOT NULL AND district_id IS NOT NULL AND village_id IS NOT NULL AND jenis IS NOT NULL AND photo_skl IS NOT NULL AND name != '' AND address != '' AND tahun_lulus != '' AND province_id != '' AND regency_id != '' AND district_id != '' AND village_id != '' AND jenis != '' AND photo_skl != ''");
-                                $row = _num($query);
-                                if($row == 1){
+//                                $query = _run("SELECT * FROM educations WHERE user_id='".$id."' AND name IS NOT NULL AND address IS NOT NULL AND tahun_lulus IS NOT NULL AND province_id IS NOT NULL AND regency_id IS NOT NULL AND district_id IS NOT NULL AND village_id IS NOT NULL AND jenis IS NOT NULL AND photo_skl IS NOT NULL AND name != '' AND address != '' AND tahun_lulus != '' AND province_id != '' AND regency_id != '' AND district_id != '' AND village_id != '' AND jenis != '' AND photo_skl != ''");
+//                                $row = _num($query);
+//                                if($row == 1){
                                 ?>
                                 <span class="badge badge-success">Data sudah lengkap</span>
                                 <?php
-                                }else{
+//                                }else{
                                 ?>
                                 <span class="badge badge-warning">Data belum lengkap</span>
                                 <?php
-                                }
+//                                }
                                 ?>
                             </div>
                         </a>
@@ -142,34 +142,34 @@
                                 <p>Mengisi program studi</p>
                                 <small><i>wajib diisi</i></small>
                                 <?php
-                                $query = _run("SELECT * FROM forms WHERE user_id='".$id."' AND study_id IS NOT NULL AND study_id_2 IS NOT NULL AND wave_id IS NOT NULL AND study_id != '' AND study_id_2 != '' AND wave_id != ''");
-                                $row = _num($query);
-                                if($row == 1){
+//                                $query = _run("SELECT * FROM forms WHERE user_id='".$id."' AND study_id IS NOT NULL AND study_id_2 IS NOT NULL AND wave_id IS NOT NULL AND study_id != '' AND study_id_2 != '' AND wave_id != ''");
+//                                $row = _num($query);
+//                                if($row == 1){
                                 ?>
                                 <span class="badge badge-success">Data sudah lengkap</span>
                                 <?php
-                                }else{
+//                                }else{
                                 ?>
                                 <span class="badge badge-warning">Data belum lengkap</span>
                                 <?php
-                                }
+//                                }
                                 ?>
                             </div>
                         </a>
                     </div>
                     <div class="row">
                         <?php
-                        $query = _run("SELECT * FROM biographies WHERE user_id='".$id."' AND nisn IS NOT NULL AND nama IS NOT NULL AND nik IS NOT NULL AND tempat_lahir IS NOT NULL AND tanggal_lahir IS NOT NULL AND jk IS NOT NULL AND tb IS NOT NULL AND bb IS NOT NULL AND religion_id IS NOT NULL AND alamat IS NOT NULL AND kebangsaan IS NOT NULL AND province_id IS NOT NULL AND regency_id IS NOT NULL AND district_id IS NOT NULL AND village_id IS NOT NULL AND email IS NOT NULL AND no_hp IS NOT NULL AND photo IS NOT NULL AND nisn != '' AND nama != '' AND nik != '' AND tempat_lahir != '' AND tanggal_lahir != '' AND jk != '' AND tb != '' AND bb != '' AND religion_id != '' AND alamat != '' AND kebangsaan != '' AND province_id != '' AND regency_id != '' AND district_id != '' AND village_id != '' AND email != '' AND no_hp != '' AND photo != ''");
-                        $row = _num($query);
-                        $query1 = _run("SELECT * FROM economies WHERE user_id='".$id."' AND penghasilan_ayah IS NOT NULL AND penghasilan_ibu IS NOT NULL AND hutang IS NOT NULL AND cicilan_hutang IS NOT NULL AND piutang IS NOT NULL AND cicilan_piutang IS NOT NULL AND tabungan_keluarga IS NOT NULL AND penghasilan_ayah != '' AND penghasilan_ibu != ''");
-                        $row1 = _num($query1);
-                        $query2 = _run("SELECT * FROM families WHERE user_id='".$id."' AND nama_ayah IS NOT NULL AND status_ayah IS NOT NULL AND hubungan_ayah IS NOT NULL AND pendidikan_ayah IS NOT NULL AND pekerjaan_ayah IS NOT NULL AND detil_ayah IS NOT NULL AND nama_ibu IS NOT NULL AND status_ibu IS NOT NULL AND hubungan_ibu IS NOT NULL AND pendidikan_ibu IS NOT NULL AND pekerjaan_ibu IS NOT NULL AND detil_ibu IS NOT NULL AND jumlah_tanggungan IS NOT NULL AND no_ortu IS NOT NULL AND photo IS NOT NULL AND nama_ayah != '' AND status_ayah != '' AND hubungan_ayah != '' AND pendidikan_ayah != '' AND pekerjaan_ayah != '' AND detil_ayah != '' AND nama_ibu != '' AND status_ibu != '' AND hubungan_ibu != '' AND pendidikan_ibu != '' AND pekerjaan_ibu != '' AND detil_ibu != '' AND jumlah_tanggungan != '' AND no_ortu != '' AND photo != ''");
-                        $row2 = _num($query2);
-                        $query3 = _run("SELECT * FROM educations WHERE user_id='".$id."' AND name IS NOT NULL AND address IS NOT NULL AND tahun_lulus IS NOT NULL AND province_id IS NOT NULL AND regency_id IS NOT NULL AND district_id IS NOT NULL AND village_id IS NOT NULL AND jenis IS NOT NULL AND photo_skl IS NOT NULL AND name != '' AND address != '' AND tahun_lulus != '' AND province_id != '' AND regency_id != '' AND district_id != '' AND village_id != '' AND jenis != '' AND photo_skl != ''");
-                        $row3 = _num($query3);
-                        if($row == 1 && $row1 == 1 && $row2 == 1 && $row3 == 1){
+//                        $query = _run("SELECT * FROM biographies WHERE user_id='".$id."' AND nisn IS NOT NULL AND nama IS NOT NULL AND nik IS NOT NULL AND tempat_lahir IS NOT NULL AND tanggal_lahir IS NOT NULL AND jk IS NOT NULL AND tb IS NOT NULL AND bb IS NOT NULL AND religion_id IS NOT NULL AND alamat IS NOT NULL AND kebangsaan IS NOT NULL AND province_id IS NOT NULL AND regency_id IS NOT NULL AND district_id IS NOT NULL AND village_id IS NOT NULL AND email IS NOT NULL AND no_hp IS NOT NULL AND photo IS NOT NULL AND nisn != '' AND nama != '' AND nik != '' AND tempat_lahir != '' AND tanggal_lahir != '' AND jk != '' AND tb != '' AND bb != '' AND religion_id != '' AND alamat != '' AND kebangsaan != '' AND province_id != '' AND regency_id != '' AND district_id != '' AND village_id != '' AND email != '' AND no_hp != '' AND photo != ''");
+//                        $row = _num($query);
+//                        $query1 = _run("SELECT * FROM economies WHERE user_id='".$id."' AND penghasilan_ayah IS NOT NULL AND penghasilan_ibu IS NOT NULL AND hutang IS NOT NULL AND cicilan_hutang IS NOT NULL AND piutang IS NOT NULL AND cicilan_piutang IS NOT NULL AND tabungan_keluarga IS NOT NULL AND penghasilan_ayah != '' AND penghasilan_ibu != ''");
+//                        $row1 = _num($query1);
+//                        $query2 = _run("SELECT * FROM families WHERE user_id='".$id."' AND nama_ayah IS NOT NULL AND status_ayah IS NOT NULL AND hubungan_ayah IS NOT NULL AND pendidikan_ayah IS NOT NULL AND pekerjaan_ayah IS NOT NULL AND detil_ayah IS NOT NULL AND nama_ibu IS NOT NULL AND status_ibu IS NOT NULL AND hubungan_ibu IS NOT NULL AND pendidikan_ibu IS NOT NULL AND pekerjaan_ibu IS NOT NULL AND detil_ibu IS NOT NULL AND jumlah_tanggungan IS NOT NULL AND no_ortu IS NOT NULL AND photo IS NOT NULL AND nama_ayah != '' AND status_ayah != '' AND hubungan_ayah != '' AND pendidikan_ayah != '' AND pekerjaan_ayah != '' AND detil_ayah != '' AND nama_ibu != '' AND status_ibu != '' AND hubungan_ibu != '' AND pendidikan_ibu != '' AND pekerjaan_ibu != '' AND detil_ibu != '' AND jumlah_tanggungan != '' AND no_ortu != '' AND photo != ''");
+//                        $row2 = _num($query2);
+//                        $query3 = _run("SELECT * FROM educations WHERE user_id='".$id."' AND name IS NOT NULL AND address IS NOT NULL AND tahun_lulus IS NOT NULL AND province_id IS NOT NULL AND regency_id IS NOT NULL AND district_id IS NOT NULL AND village_id IS NOT NULL AND jenis IS NOT NULL AND photo_skl IS NOT NULL AND name != '' AND address != '' AND tahun_lulus != '' AND province_id != '' AND regency_id != '' AND district_id != '' AND village_id != '' AND jenis != '' AND photo_skl != ''");
+//                        $row3 = _num($query3);
+//                        if($row == 1 && $row1 == 1 && $row2 == 1 && $row3 == 1){
                         ?>
-                        <a href="?p=<?php echo crypt('cetakKartuPeserta','DitoCahyaPratama') ?>&id=<?php echo crypt($id, 'DitoCahyaPratama') ?>" target="_blank" class="col-md-4 col-sm-12">
+                        <a href="?p=<?php echo crypt('cetakKartuPeserta','DitoCahyaPratama') ?>&id=" target="_blank" class="col-md-4 col-sm-12">
                             <div class="well well-white">
                                 <h5><span class="badge badge-warning">7</span> Cetak kartu peserta</h5>
                                 <p>Mencetak kartu peserta pendaftaran mahasiswa tahun 2019</p>
@@ -177,7 +177,7 @@
                             </div>
                         </a>
                         <?php
-                        }else{
+//                        }else{
                         ?>
                         <a class="col-md-4 col-sm-12">
                             <div class="well well-white">
@@ -187,10 +187,10 @@
                             </div>
                         </a>
                         <?php
-                        }
-                        if($row == 1 && $row1 == 1 && $row2 == 1 && $row3 == 1){
+//                        }
+//                        if($row == 1 && $row1 == 1 && $row2 == 1 && $row3 == 1){
                         ?>
-                        <a href="?p=<?php echo crypt('cetakFormulir','DitoCahyaPratama') ?>&id=<?php echo crypt($id, 'DitoCahyaPratama') ?>" target="_blank" class="col-md-4 col-sm-12">
+                        <a href="?p=<?php echo crypt('cetakFormulir','DitoCahyaPratama') ?>&id=" target="_blank" class="col-md-4 col-sm-12">
                             <div class="well well-white">
                                 <h5><span class="badge badge-warning">8</span> Cetak formulir</h5>
                                 <p>Mencetak formulir peserta pendaftaran mahasiswa tahun 2019</p>
@@ -198,7 +198,7 @@
                             </div>
                         </a>
                         <?php
-                        if(_num(_run("SELECT * FROM registrations WHERE user_id='".$id."'")) >= 1){
+//                        if(_num(_run("SELECT * FROM registrations WHERE user_id='".$id."'")) >= 1){
                         ?>
                         <a href="?p=<?php echo crypt('registrasi','DitoCahyaPratama') ?>" class="col-md-4 col-sm-12">
                             <div class="well well-white">
@@ -208,8 +208,8 @@
                             </div>
                         </a>
                         <?php
-                        }
-                        }else{
+//                        }
+//                        }else{
                         ?>
                         <a class="col-md-4 col-sm-12">
                             <div class="well well-white">
@@ -219,7 +219,7 @@
                             </div>
                         </a>
                         <?php
-                        }
+//                        }
                         ?>
                     </div>
                 </div>
@@ -227,74 +227,74 @@
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
                             <?php
-                            $queryFoto = _run("SELECT * FROM biographies WHERE user_id = '".$id."'");
-                            $dataFoto = _get($queryFoto);
+//                            $queryFoto = _run("SELECT * FROM biographies WHERE user_id = '".$id."'");
+//                            $dataFoto = _get($queryFoto);
                             ?>
                             <?php
-                            if($dataFoto['photo']){
+//                            if($dataFoto['photo']){
                             ?>
-                            <h5 class="card-title"><img src="temp/image/pribadi/<?php echo $dataFoto['photo'] ?>" width="50px" style="border-radius: 5px; margin-right: 20px"></img><?php echo $_SESSION['username'] ?></h5>
+{{--                            <h5 class="card-title"><img src="temp/image/pribadi/" width="50px" style="border-radius: 5px; margin-right: 20px"></img><?php echo $_SESSION['username'] ?></h5>--}}
                             <?php
-                            }else{
+//                            }else{
                             ?>
-                            <h5 class="card-title"><img src="assets/front_end/images/student_image.png"></img><?php echo $_SESSION['username'] ?></h5>
+{{--                            <h5 class="card-title"><img src="assets/front_end/images/student_image.png"></img><?php echo $_SESSION['username'] ?></h5>--}}
                             <?php
-                            }
+//                            }
                             ?>
                             <?php
-                            $queryUser = _run("SELECT * FROM users WHERE id='".$id."'");
-                            $dataUser = _get($queryUser);
-                            $no_daftar = substr($dataUser['created_at'], 0,3).".".substr($dataUser['created_at'], 3,1).substr($dataUser['created_at'], 5,2).".".substr($dataUser['created_at'], 8,2).substr($dataUser['created_at'], 11,1).".".substr($dataUser['created_at'], 12,1).substr($dataUser['created_at'], 14,2).".".substr($dataUser['created_at'], 17,2).$dataUser['id'];
+//                            $queryUser = _run("SELECT * FROM users WHERE id='".$id."'");
+//                            $dataUser = _get($queryUser);
+//                            $no_daftar = substr($dataUser['created_at'], 0,3).".".substr($dataUser['created_at'], 3,1).substr($dataUser['created_at'], 5,2).".".substr($dataUser['created_at'], 8,2).substr($dataUser['created_at'], 11,1).".".substr($dataUser['created_at'], 12,1).substr($dataUser['created_at'], 14,2).".".substr($dataUser['created_at'], 17,2).$dataUser['id'];
                             ?>
-                            <h6 class="card-subtitle mb-2 text-muted"><?php echo $_SESSION['email'] ?></h6>
-                            <h6 class="card-subtitle mb-2 text-muted"><?php echo $no_daftar ?></h6>
+{{--                            <h6 class="card-subtitle mb-2 text-muted"><?php echo $_SESSION['email'] ?></h6>--}}
+{{--                            <h6 class="card-subtitle mb-2 text-muted"><?php echo $no_daftar ?></h6>--}}
                             <!-- <a href="#" class="card-link">Ubah password</a> -->
                             <!-- <a href="#" class="card-link">Ubah email</a>/ -->
                         </div>
                     </div>
                     <?php
-                    $queryForms = _run("SELECT * FROM forms WHERE user_id='".$id."'");
-                    $dataForms = _get($queryForms);
-                    if($dataForms['status'] == 'Diterima' || $dataForms['status'] == 'Ditolak'){
+//                    $queryForms = _run("SELECT * FROM forms WHERE user_id='".$id."'");
+//                    $dataForms = _get($queryForms);
+//                    if($dataForms['status'] == 'Diterima' || $dataForms['status'] == 'Ditolak'){
                     ?>
                     <div class="card" style="width: 18rem;">
                         <div class="alert alert-info">
                             INFO TERKINI !! <br>
                             <?php
-                            if($dataForms['status'] == 'Diterima'){
-                            $queryRegistrasi = _run("SELECT registrations.id, registrations.study_id, studies.name , registrations.status, registrations.photo FROM registrations INNER JOIN studies ON registrations.study_id = studies.id  WHERE user_id = '".$id."'");
-                            $dataRegistrasi = _get($queryRegistrasi);
+//                            if($dataForms['status'] == 'Diterima'){
+//                            $queryRegistrasi = _run("SELECT registrations.id, registrations.study_id, studies.name , registrations.status, registrations.photo FROM registrations INNER JOIN studies ON registrations.study_id = studies.id  WHERE user_id = '".$id."'");
+//                            $dataRegistrasi = _get($queryRegistrasi);
                             ?>
                             <ul>
-                                <li>Selamat anda diterima di program studi <?php echo $dataRegistrasi['name'] ?></li>
+{{--                                <li>Selamat anda diterima di program studi <?php echo $dataRegistrasi['name'] ?></li>--}}
                                 <?php
-                                if($dataRegistrasi['photo'] && $dataRegistrasi['status'] == '0'){
+//                                if($dataRegistrasi['photo'] && $dataRegistrasi['status'] == '0'){
                                     echo '<li>Harap menunggu maksimal 24 jam untuk proses registrasi.</li>';
-                                }else if($dataRegistrasi['photo'] && $dataRegistrasi['status'] == '1'){
+//                                }else if($dataRegistrasi['photo'] && $dataRegistrasi['status'] == '1'){
                                     echo '<li>Anda sudah dikonfirmasi dan harap membawa berkas-berkas ke unisma malang pada tanggal 30 juni 2019.</li>';
-                                }else{
+//                                }else{
                                     echo '<li>Harap melakukan registrasi pada menu registrasi</li>';
-                                }
+//                                }
                                 ?>
                             </ul>
                             <?php
-                            }else{
+//                            }else{
                             ?>
                             Mohon Maaf anda tidak diterima
                             <?php
-                            }
+//                            }
                             ?>
                         </div>
                     </div>
                     <?php
-                    }
-                    if($row == 1 && $row1 == 1 && $row2 == 1 && $row3 == 1){
+//                    }
+//                    if($row == 1 && $row1 == 1 && $row2 == 1 && $row3 == 1){
                     ?>
                     <div class="card" style="width: 18rem;">
                         <button></button>
                     </div>
                     <?php
-                    }
+//                    }
 
                     ?>
                 </div>
