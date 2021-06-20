@@ -24,10 +24,10 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('student/img/favicon.png') }}">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="{{ asset('student/css/normalize.css') }}">
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="{{ asset('student/css/main.css') }}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('student/css/bootstrap.min.css') }}">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ asset('student/css/main.css') }}">
     <!-- Animate CSS -->
     <link rel="stylesheet" href="{{ asset('student/css/animate.min.css') }}">
     <!-- Font-awesome CSS-->
@@ -52,6 +52,7 @@
     <link rel="stylesheet" href="{{ asset('student/style.css') }}">
     <!-- Modernizr Js -->
     <script src="{{ asset('student/js/modernizr-2.8.3.min.js') }}"></script>
+    @stack('cssCode')
 </head>
 <body>
     @include('sweetalert::alert')
@@ -95,5 +96,6 @@
     <script src="{{ asset('student/js/jquery.gridrotator.js') }}" type="text/javascript"></script>
     <!-- Custom Js -->
     <script src="{{ asset('student/js/main.js') }}" type="text/javascript"></script>
+    @stack('jsCode')
 </body>
 </html>

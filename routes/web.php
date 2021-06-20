@@ -25,6 +25,10 @@ Route::prefix('/admin')->group(function () {
     Route::get('/login', [App\Http\Controllers\Auth\CheckLoginController::class, 'checkLoginAdmin']);
 });
 
+// Route::get('/student', function () {
+//    echo "test";
+// });
+
 Route::group(['middleware' => 'auth'], function(){
     Route::group(['middleware' => 'role:1'], function() {
         Route::prefix('/admin')->group(function () {
@@ -39,19 +43,23 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('/', [App\Http\Controllers\StudentDataController::class, 'index'])->name('studentdata.home');
                 Route::get('/detail/{id}', [App\Http\Controllers\StudentDataController::class, 'show'])->name('studentdata.detail');
             });
-            Route::prefix('/achievementdata')->group(function () {
-                Route::get('/', [App\Http\Controllers\AchievementDataController::class, 'index'])->name('achievementdata.home');
-            });
             Route::prefix('/selectionhealths')->group(function () {
                 Route::get('/', [App\Http\Controllers\SelectionHealthsController::class, 'index'])->name('selectionhealths.home');
                 Route::get('/statusupdate/{id}/{status}', [App\Http\Controllers\SelectionHealthsController::class, 'update'])->name('selectionhealths.statusupdate');
             });
-
+            Route::prefix('/selectionachievements')->group(function () {
+                Route::get('/{departementId}', [App\Http\Controllers\SelectionAchievementsController::class, 'index'])->name('selectionachievement.home');
+                Route::get('/detail/{id}', [App\Http\Controllers\SelectionAchievementsController::class, 'show'])->name('selectionachievement.detail');
+                Route::get('/statusupdate/{id}/{departementId}/{status}', [App\Http\Controllers\SelectionAchievementsController::class, 'update'])->name('selectionachievement.statusupdate');
+            });
             Route::prefix('/selectionreports')->group(function () {
                 Route::get('/{departementId}', [App\Http\Controllers\SelectionReportsController::class, 'index'])->name('selectionreports.home');
-                // Route::get('/statusupdate/{id}/{status}', [App\Http\Controllers\SelectionHealthsController::class, 'update'])->name('selectionhealths.statusupdate');
+                Route::get('/finalization/{departementId}/{status}', [App\Http\Controllers\SelectionReportsController::class, 'update'])->name('selectionreports.finalization');
             });
-
+            Route::prefix('/config')->group(function () {
+                Route::get('/', [App\Http\Controllers\ConfigController::class, 'index'])->name('config.home');
+                Route::put('/update', [App\Http\Controllers\ConfigController::class, 'update'])->name('config.update');
+            });
             // Route::get('/', [KerjaController::class, 'myjob'])->name('user.jobsaya');
             // Route::post('/store', [KerjaController::class, 'store']);
             // Route::get('/get/{id}', [KerjaController::class, 'getById']);
@@ -65,6 +73,10 @@ Route::group(['middleware' => 'auth'], function(){
             Route::prefix('/dashboard')->group(function () {
                 Route::get('/', [App\Http\Controllers\DashboardController::class, 'student'])->name('dashboard.student');
             });
+            Route::get('/biodata', [\App\Http\Controllers\StudentController::class, 'index'])->name('student.biodata');
+            Route::get('/prestasi', [\App\Http\Controllers\AchievementController::class, 'index'])->name('student.achievement');
+            Route::get('/rapor', [\App\Http\Controllers\ReportController::class, 'index'])->name('student.report');
+            Route::get('/sekolah-asal', [\App\Http\Controllers\SchoolOriginController::class, 'index'])->name('student.schoolorigin');
             Route::get('/bukti_penerimaan', [App\Http\Controllers\StudentController::class, 'bukti_penerimaan'])->name('bukti.penerimaan');
             Route::get('/bukti_pendaftaran', [App\Http\Controllers\StudentController::class, 'bukti_pendaftaran'])->name('bukti.pendaftaran');
         });

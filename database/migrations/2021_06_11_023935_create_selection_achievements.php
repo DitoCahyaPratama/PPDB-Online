@@ -16,7 +16,7 @@ class CreateSelectionAchievements extends Migration
         Schema::create('selection_achievements', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('student_id');
-            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade')->onUpdate('cascade');;
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('achievement_id_1');
             $table->foreign('achievement_id_1')->references('id')->on('achievements');
             $table->unsignedBigInteger('achievement_id_2');

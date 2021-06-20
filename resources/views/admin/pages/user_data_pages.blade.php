@@ -1,7 +1,7 @@
 @extends('admin.layouts.admin')
 
 @section('content')
-@if(session('successful_message alert-dismissible fade show'))
+@if(session('successful_message'))
 <div class="alert alert-success">
     {{ session('successful_message') }}
 </div>

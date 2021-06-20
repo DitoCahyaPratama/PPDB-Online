@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             IndoRegionSeeder::class,
             ReligionSeeder::class,
             DepartmentSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            InitiateConfigSeeder::class,
         ]);
     }
 }

@@ -25,4 +25,19 @@ class Student extends Model
         'phone_number',
         'photo',
     ];
+
+    public function regencies()
+    {
+        return $this->hasOne(SchoolOrigin::class);
+    }
+
+    public function selectionAchievement()
+    {
+        return $this->hasOne(SelectionAchievement::class);
+    }
+
+    public function selectionReport()
+    {
+        return $this->hasOne(SelectionReport::class);
+    }
 }

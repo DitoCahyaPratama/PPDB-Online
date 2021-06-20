@@ -18,8 +18,10 @@ class CreateAchievementsTable extends Migration
             $table->unsignedBigInteger('student_id');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name');
+            $table->string('champion');
             $table->string('year');
             $table->string('level');
+            $table->string('type');
             $table->string('photo');
             $table->timestamps();
         });

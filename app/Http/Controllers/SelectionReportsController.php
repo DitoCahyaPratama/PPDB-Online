@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SelectionReport;
+use App\Models\Config;
 use Illuminate\Http\Request;
 use DB;
 
@@ -34,7 +35,9 @@ class SelectionReportsController extends Controller
         ->limit(50)
         ->get();
         $countStudents=SelectionReport::where('department_id','=',$depId)->count();
-        return view('admin.pages.selection_report_pages',compact('departement','reportData','countStudents'));
+        $countFinalization=SelectionReport::where('department_id','=',$depId)->where('status','=',1)->count();
+        $configData=Config::find(1)->first();
+        return view('admin.pages.selection_report_pages',compact('departement','reportData','countStudents','configData','depId','countFinalization'));
     }
 
     /**
@@ -87,9 +90,18 @@ class SelectionReportsController extends Controller
      * @param  \App\Models\SelectionReport  $selectionReport
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SelectionReport $selectionReport)
+    public function update(Request $request,$departementId,$status)
     {
-        //
+        try {
+            SelectionReport::where('department_id','=', $departementId)->orderBy('avg','desc')->take(50)->update(array('status' => $status));
+            return redirect()->route('selectionreports.home',['departementId'=>$departementId])->with([
+                'successful_message' => 'Data Seleksi berhasil Difinalisasi',
+            ]);
+        } catch (\Throwable $th) {
+            return redirect()->route('selectionreports.home',['departementId'=>$departementId])->with([
+                'failed_message' => $th->getMessage(),
+            ]);
+        }
     }
 
     /**
@@ -103,3 +115,4 @@ class SelectionReportsController extends Controller
         //
     }
 }
+

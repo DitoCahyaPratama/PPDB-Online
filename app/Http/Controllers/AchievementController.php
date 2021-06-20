@@ -14,7 +14,7 @@ class AchievementController extends Controller
      */
     public function index()
     {
-        //
+        return view('student.achievement');
     }
 
     /**

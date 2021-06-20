@@ -20,4 +20,9 @@ class SelectionReport extends Model
     // {
     //     return $this->belongsToMany('App\Report','report_id','id');
     // }
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
 }

@@ -15,8 +15,10 @@ class CreateSelectionReports extends Migration
     {
         Schema::create('selection_reports', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('student_id');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('report_id');
-            $table->foreign('report_id')->references('id')->on('reports')->onDelete('cascade')->onUpdate('cascade');            
+            $table->foreign('report_id')->references('id')->on('reports')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('department_id');
             $table->foreign('department_id')->references('id')->on('departments');
             $table->double('avg');

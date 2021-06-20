@@ -35,7 +35,7 @@ class LoginController extends Controller
         if (auth()->user()->role == '1') {
             return '/admin/dashboard';
         }
-        return '/';
+        return '/students/dashboard';
     }
 
     /**
@@ -47,8 +47,8 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    // public function logout(){
-    //     Auth::logout();
-    //     return redirect('/admin/login');
-    // }
+//     public function logout(){
+//         Auth::logout();
+//         return redirect('/admin/login');
+//     }
 }
