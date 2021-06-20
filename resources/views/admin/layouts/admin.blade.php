@@ -62,14 +62,14 @@
             <!-- Nav Item - Dashboard -->
             <li class="nav-item {{Request::segment(2) == 'userdata' ? 'active' : null}} ">
                 <a class="nav-link" href="{{ route('userdata.home') }}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-fw fa-user"></i>
                     <span>Data Akun User</span></a>
             </li>
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item {{Request::segment(2) == 'studentdata' ? 'active' : null}}">
                 <a class="nav-link" href="{{route('studentdata.home')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-fw fa-user"></i>
                     <span>Data Calon Siswa</span></a>
             </li>
 
@@ -91,7 +91,7 @@
             <!-- Nav Item - Charts -->
             <li class="nav-item {{Request::segment(2) == 'selectionhealths' ? 'active' : null}}">
                 <a class="nav-link" href="{{route('selectionhealths.home')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-fw fa-folder"></i>
                     <span>Seleksi Data Kesehatan</span></a>
             </li>
 
@@ -140,7 +140,7 @@
 
             <li class="nav-item {{Request::segment(2) == 'config' ? 'active' : null}}">
                 <a class="nav-link" href="{{route('config.home')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-fw fa-key"></i>
                     <span>Konfigurasi</span></a>
             </li>
 
