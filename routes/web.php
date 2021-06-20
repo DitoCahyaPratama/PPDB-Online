@@ -45,6 +45,7 @@ Route::group(['middleware' => 'auth'], function(){
             });
             Route::prefix('/selectionhealths')->group(function () {
                 Route::get('/', [App\Http\Controllers\SelectionHealthsController::class, 'index'])->name('selectionhealths.home');
+                Route::get('/detail/{id}', [App\Http\Controllers\SelectionHealthsController::class, 'show'])->name('selectionhealths.detail');
                 Route::get('/statusupdate/{id}/{status}', [App\Http\Controllers\SelectionHealthsController::class, 'update'])->name('selectionhealths.statusupdate');
             });
             Route::prefix('/selectionachievements')->group(function () {

@@ -15,4 +15,8 @@ class Health extends Model
         'status'
     ];
 
+    public function student(){
+        return $this->belongsTo(Student::class,'student_id','id');
+    }
+
 }

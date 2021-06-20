@@ -15,11 +15,12 @@ class SelectionHealthsController extends Controller
      */
     public function index()
     {
-        $healthData=DB::table('healths')
-        ->select('healths.*',
-        'students.name AS nameStudents')
-        ->join('students','students.id','=','healths.student_id') 
-        ->get();
+        // $healthData=DB::table('healths')
+        // ->select('healths.*',
+        // 'students.name AS nameStudents')
+        // ->join('students','students.id','=','healths.student_id') 
+        // ->get();
+        $healthData = Health::with(['student'])->get();
         return view('admin.pages.selection_health_pages',compact('healthData'));
     }
 
@@ -52,7 +53,8 @@ class SelectionHealthsController extends Controller
      */
     public function show($id)
     {
-        //
+        $healthDataDetail = Health::with(['student'])->where('healths.id','=',$id)->first();
+        return view('admin.pages.selection_detail_health_pages',compact('healthDataDetail'));
     }
 
     /**
@@ -63,7 +65,7 @@ class SelectionHealthsController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**

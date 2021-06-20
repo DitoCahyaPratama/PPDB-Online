@@ -22,7 +22,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama Siswa</th>
+                            <th>Nama Calon Siswa</th>
                             <th>Prestasi 1</th>
                             <th>Prestasi 2</th>
                             <th>Prestasi 3</th>
@@ -37,10 +37,10 @@
                         @foreach ($achievData as $achievDatas)
                             <tr>
                                 <td>{{ $no++ }}</td> 
-                                <td>{{$achievDatas->nameStudents}}</td>
-                                <td>{{$achievDatas->achievements1}}</td>
-                                <td>{{$achievDatas->achievements2}}</td>
-                                <td>{{$achievDatas->achievements3}}</td>
+                                <td>{{$achievDatas->student->name}}</td>
+                                <td>{{$achievDatas->achievement1->name}}</td>
+                                <td>{{$achievDatas->achievement2->name}}</td>
+                                <td>{{$achievDatas->achievement3->name}}</td>
                                 <td>
                                     @if ($achievDatas->status == 0)
                                         <span>Belum Ada Status</span>

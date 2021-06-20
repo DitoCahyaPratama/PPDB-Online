@@ -17,4 +17,17 @@ class SelectionAchievement extends Model
         'department_id',
         'status'
     ];
+
+    public function student(){
+        return $this->belongsTo(Student::class,'student_id','id');
+    }
+    public function achievement1(){
+        return $this->belongsTo(Achievement::class,'achievement_id_1','id');
+    }
+    public function achievement2(){
+        return $this->belongsTo(Achievement::class,'achievement_id_2','id');
+    }
+    public function achievement3(){
+        return $this->belongsTo(Achievement::class,'achievement_id_3','id');
+    }
 }

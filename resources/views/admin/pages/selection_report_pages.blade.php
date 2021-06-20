@@ -20,11 +20,17 @@
             <h6>Tanggal Hari Ini : {{ date('d M Y') }}</h6>
             <h6>Jumlah Pendaftar : {{ $countStudents }}</h6>
             @if (date('Y-m-d') >= $configData->date_registration_selection_report_end)
-            <div class="alert alert-info">
-                <span>Seleksi telah berakhir, silahkan untuk menekan tombol berikut untuk memfinalisasi seleksi data jurusan {{$departement}}</span>
-                <br>
-                <a href="{{route('selectionreports.finalization',['departementId'=>$depId,'status'=>1])}}" class="btn btn-info @if ($countFinalization == 50) disabled @endif">Finalisasi Data</a>
-            </div>
+                @if ($countFinalization == 0)
+                <div class="alert alert-warning">
+                    <span>Seleksi telah berakhir, data jurusan {{$departement}} tidak difinalisasi dikarenakan jumlah siswa masih kosong</span>
+                </div>
+                @else 
+                <div class="alert alert-info">
+                    <span>Seleksi telah berakhir, silahkan untuk menekan tombol berikut untuk memfinalisasi seleksi data jurusan {{$departement}}</span>
+                    <br>
+                    <a href="{{route('selectionreports.finalization',['departementId'=>$depId,'status'=>1])}}" class="btn btn-info @if ($countFinalization > 0) disabled @endif">Finalisasi</a>
+                </div>
+                @endif
             @endif
             <hr>
             <div class="table-responsive">
@@ -32,7 +38,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
+                            <th>Nama Calon Siswa</th>
                             <th>Agama</th>
                             <th>PKN</th>
                             <th>BI</th>
