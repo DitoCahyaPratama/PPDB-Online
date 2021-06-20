@@ -16,8 +16,9 @@ class DashboardController extends Controller
     {
         $countUser=DB::table('users')->count();
         $countStudent=DB::table('students')->count();
+        $countSelectionAchievements=DB::table('selection_achievements')->count();
         $countSelectionReports=DB::table('selection_reports')->count();
-        return view('admin.pages.dashboard_pages',compact('countUser','countStudent','countSelectionReports'));
+        return view('admin.pages.dashboard_pages',compact('countUser','countStudent','countSelectionReports','countSelectionAchievements'));
     }
 
     public function student(){

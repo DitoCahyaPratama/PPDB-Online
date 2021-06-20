@@ -22,7 +22,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama Siswa</th>
+                            <th>Nama Calon Siswa</th>
                             <th>Foto</th>
                             <th>Status</th>
                             <th>Aksi</th>
@@ -35,8 +35,8 @@
                         @foreach ($healthData as $healthDatas)
                         <tr>
                             <td>{{ $no++ }}</td>    
-                            <td>{{ $healthDatas->nameStudents }}</td>    
-                            <td><img src="{{ $healthDatas->photo }}" class="img-fluid"></td>    
+                            <td>{{ $healthDatas->student->name }}</td>    
+                            <td style="width: 30%"><center><img src="{{ asset($healthDatas->photo) }}" class="img-fluid" width="50%"></center></td>    
                             <td>
                                 @if ($healthDatas->status == 0)
                                     <h6>Belum Terdapat Status</h6>
@@ -47,6 +47,7 @@
                                 @endif
                             </td>    
                             <td>
+                                <a href="{{route('selectionhealths.detail',['id'=>$healthDatas->id])}}" class="btn btn-warning ">Detail</a>
                                 <a href="{{route('selectionhealths.statusupdate',['id'=>$healthDatas->id,'status'=>1])}}" class="btn btn-success @if ($healthDatas->status == 1 || $healthDatas->status == 2) disabled @endif" onclick="return confirm('Terima surat kesehatan ?')">Terima</a>
                                 <a href="{{route('selectionhealths.statusupdate',['id'=>$healthDatas->id,'status'=>2])}}" class="btn btn-danger @if ($healthDatas->status == 1 || $healthDatas->status == 2) disabled @endif" onclick="return confirm('Tolak surat kesehatan ?')">Tolak</a>
                             </td>

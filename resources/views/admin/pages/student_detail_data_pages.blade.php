@@ -19,35 +19,48 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-6">
-                    <img src="">
+                    <center><img src="{{asset($studentData->photo)}}" class="img-fluid" style="width: 80%"></center>
                 </div>
                 <div class="col-lg-6">
+                    <h5><b>Data Umum</b></h5>
                     <h5>Nama</h5>
-                    <p>{{$studentData->name}}</p>
+                    <p><b>{{$studentData->name}}</b></p>
                     <h5>Alamat</h5>
-                    <p>{{$studentData->address}}</p>
+                    <p><b>{{$studentData->address}}</b></p>
                     <h5>NIK</h5>
-                    <p>{{$studentData->nik}}</p>
+                    <p><b>{{$studentData->nik}}</b></p>
                     <h5>Tempat Lahir</h5>
-                    <p>{{$studentData->place_born}}</p>
+                    <p><b>{{$studentData->place_born}}</b></p>
                     <h5>Tanggal Lahir</h5>
-                    <p>{{$studentData->date_born}}</p>
+                    <p><b>{{$studentData->date_born}}</b></p>
                     <h5>Jenis Kelamin</h5>
-                    <p>{{$studentData->gender}}</p>
+                    <p><b>{{$studentData->gender}}</b></p>
                     <h5>Agama</h5>
-                    <p>{{$studentData->nameReligion}}</p>
-                    <h5>Provinsi</h5>
-                    <p>{{$studentData->nameProvinces}}</p>
-                    <h5>Kabupaten</h5>
-                    <p>{{$studentData->nameRegencies}}</p>
-                    {{-- <h5>Kota</h5>
-                    <p>{{$studentData->name']}}</p> --}}
-                    <h5>Kecamatan</h5>
-                    <p>{{$studentData->nameDistricts}}</p>
-                    <h5>Desa</h5>
-                    <p>{{$studentData->nameVillages}}</p>
+                    <p><b>{{$studentData->nameReligion}}</b></p>
                     <h5>No Hp</h5>
-                    <p>{{$studentData->phone_number}}</p>
+                    <p><b>{{$studentData->phone_number}}</b></p>
+                    <hr>
+                    <h5><b>Data Tempat Tinggal</b></h5>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h5>Provinsi</h5>
+                            <p><b>{{$studentData->nameProvinces}}</b></p>
+                        </div>
+                        <div class="col-lg-6">
+                            <h5>Kabupaten/Kota</h5>
+                            <p><b>{{$studentData->nameRegencies}}</b></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h5>Kecamatan</h5>
+                            <p><b>{{$studentData->nameDistricts}}</b></p>
+                        </div>
+                        <div class="col-lg-6">
+                            <h5>Desa</h5>
+                            <p><b>{{$studentData->nameVillages}}</b></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

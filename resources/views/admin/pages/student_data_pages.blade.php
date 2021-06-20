@@ -41,7 +41,7 @@
                         <td>{{ $studentDatas->nik }}</td>      
                         <td>{{ $studentDatas->gender }}</td>      
                         <td>{{ $studentDatas->phone_number }}</td>      
-                        <td><img src="{{ $studentDatas->phone_number }}" class="img-fluid"></td>    
+                        <td style="width: 20%"><center><img src="{{asset($studentDatas->photo)}}" class="img-fluid" style="width: 30%"></center></td>    
                         <td>
                             <a href="{{route('studentdata.detail',['id'=>$studentDatas->id])}}" class="btn btn-success">Detail</a>
                             {{-- <a href="{{route('userdata.delete',['id'=>$studentDatas->id])}}" class="btn btn-danger" onclick="return confirm('hapus data user yang anda pilih?')">Hapus</a> --}}
