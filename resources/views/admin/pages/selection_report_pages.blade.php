@@ -20,7 +20,7 @@
             <h6>Tanggal Hari Ini : {{ date('d M Y') }}</h6>
             <h6>Jumlah Pendaftar : {{ $countStudents }}</h6>
             @if (date('Y-m-d') >= $configData->date_registration_selection_report_end)
-                @if ($countFinalization == 0)
+                @if ($countStudents == 0)
                 <div class="alert alert-warning">
                     <span>Seleksi telah berakhir, data jurusan {{$departement}} tidak difinalisasi dikarenakan jumlah siswa masih kosong</span>
                 </div>
@@ -28,7 +28,7 @@
                 <div class="alert alert-info">
                     <span>Seleksi telah berakhir, silahkan untuk menekan tombol berikut untuk memfinalisasi seleksi data jurusan {{$departement}}</span>
                     <br>
-                    <a href="{{route('selectionreports.finalization',['departementId'=>$depId,'status'=>1])}}" class="btn btn-info @if ($countFinalization > 0) disabled @endif">Finalisasi</a>
+                    <a href="{{route('selectionreports.finalization',['departementId'=>$depId])}}" class="btn btn-info @if ($countFinalization > 0) disabled @endif">Finalisasi</a>
                 </div>
                 @endif
             @endif
@@ -45,6 +45,7 @@
                             <th>IPA</th>
                             <th>IPS</th>
                             <th>Rata-Rata</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,6 +62,16 @@
                         <td>{{ $reportDatas->ipa }}</td>
                         <td>{{ $reportDatas->ips }}</td>
                         <td>{{ $reportDatas->avg }}</td>
+                        <td>
+                            @if ($reportDatas->status == 0)
+                            belum ada status
+                            @elseif ($reportDatas->status == 1)
+                            diterima
+                            @else
+                            ditolak
+                            @endif
+                            {{-- {{ $reportDatas->status == 0 ? 'belum ada status' : $reportDatas->status == 1 ? 'diterima' : 'ditolak'}} --}}
+                        </td>
                     </tr>
                     @endforeach 
                     </tbody>

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Info;
+use App\Http\Requests\InfoRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class InfoController extends Controller
 {
@@ -13,7 +15,8 @@ class InfoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        return view("info");
+        $info=Info::orderBy('created_at', 'desc')->paginate(5);
+        return view('admin.pages.info_pages',compact('info'));
     }
 
     /**
@@ -24,7 +27,7 @@ class InfoController extends Controller
     public function create()
     {
         //
-        return view('pages.educations.create');
+        // return view('pages.educations.create');
     }
 
     /**
@@ -33,26 +36,30 @@ class InfoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EducationRequest $request)
+    public function store(InfoRequest $request)
     {
-        $validated = $request->validated();
+        try {
+            $validated = $request->validated();
+            $imagename = !$request->hasFile('image') ? null : $request->file('image')->store('upload/info', 'public');
+            $info = Info::create(array_merge(
+                $validated,
+                [
+                    'title' => $request->title,
+                    'description' => $request->description,
+                    'image' =>  $imagename,
+                    'slug' => Str::slug($request->title),
+                ],
+            ));
 
-        $image = time().'.'.$request->image->extension();
-        $request->image->move(public_path('uploads/educations'), $image);
-
-        $info = Info::create(array_merge(
-            $validated,
-            [
-                'title' => $request->title,
-                'description' => $request->description,
-                'image' => $image,
-                'slug' => Str::slug($request->title),
-            ],
-        ));
-
-        //jika data berhasil ditambahkan, akan kembali ke halaman utama
-        return redirect()->route('education.index')
-            ->with('success', 'Edukasi berhasil ditambahkan');
+            return redirect()->route('info.home')->with([
+                'successful_message' => 'Data telah ditambahkan',
+            ]);
+        } catch (\Throwable $th) {
+            return redirect()->route('info.home')->with([
+                'failed_message' => $th->getMessage(),
+            ]);
+        }
+        
     }
 
     /**
@@ -63,8 +70,8 @@ class InfoController extends Controller
      */
     public function show($id)
     {
-        $education = Education::find($id);
-        return view('pages.educations.show', compact('education'));
+        $info = Info::find($id);
+        return view('admin.pages.info_detail_pages', compact('info'));
     }
 
     /**
@@ -75,8 +82,8 @@ class InfoController extends Controller
      */
     public function edit($id)
     {
-        $education = Education::find($id);
-        return view('pages.educations.edit', compact('education'));
+        $info = Info::find($id);
+        return view('admin.pages.info_update_pages', compact('info'));
     }
 
     /**
@@ -86,60 +93,58 @@ class InfoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(InfoRequest $request, $id)
     {
-        if(!$request->hasFile('image')){
-            $validator = Validator::make($request->all(), [
-                'title' => 'required',
-                'description' => 'required',
-            ]);
-            //fungsi eloquent untuk update data
-            $education = Education::find($id)->update(array_merge(
-                $validator->validated(),
-                [
-                    'title' => $request->title,
-                    'description' => $request->description,
-                    'slug' => Str::slug($request->title),
-                ],
-            ));
-
-            //jika data berhasil ditambahkan, akan kembali ke halaman utama
-            return redirect()->route('education.index')
-                ->with('success', 'Edukasi berhasil diperbarui');
-        }else{
-            $allowedfileExtension = ['jpg', 'png', 'jpeg', 'svg'];
-            $file = $request->file('image');
-            $validator = Validator::make($request->all(), [
-                'title' => 'required',
-                'description' => 'required',
-            ]);
-
-            $extension = $file->getClientOriginalExtension();
-            $check = in_array($extension, $allowedfileExtension);
-
-            if ($check) {
-                $image = time().'.'.$request->image->extension();
-                $request->image->move(public_path('uploads/educations'), $image);
+        try {
+            if(!$request->hasFile('image')){
+                $validated = $request->validated();
                 //fungsi eloquent untuk update data
-                $education = Education::find($id)->update(array_merge(
-                    $validator->validated(),
+                $education = Info::find($id)->update(array_merge(
+                    $validated,
                     [
                         'title' => $request->title,
                         'description' => $request->description,
-                        'image' => $image,
                         'slug' => Str::slug($request->title),
                     ],
                 ));
-
-                //jika data berhasil ditambahkan, akan kembali ke halaman utama
-                return redirect()->route('education.index')
-                    ->with('success', 'Edukasi berhasil diperbarui');
+                return redirect()->route('info.home')->with([
+                    'successful_message' => 'Data telah diperbarui',
+                ]);
             }else{
-                //jika data berhasil ditambahkan, akan kembali ke halaman utama
-                return redirect()->route('education.index')
-                    ->with('danger', 'Edukasi gagal diperbarui, gunakan format jpg, png, jpeg atau svg');
+                $allowedfileExtension = ['jpg', 'png', 'jpeg', 'svg'];
+                $file = $request->file('image');
+                $validated = $request->validated();
+    
+                $extension = $file->getClientOriginalExtension();
+                $check = in_array($extension, $allowedfileExtension);
+    
+                if ($check) {
+                    $imagename = $request->file('image')->store('upload/info', 'public');
+                    $education = Info::find($id)->update(array_merge(
+                        $validated,
+                        [
+                            'title' => $request->title,
+                            'description' => $request->description,
+                            'image' => $imagename,
+                            'slug' => Str::slug($request->title),
+                        ],
+                    ));
+    
+                    return redirect()->route('info.home')->with([
+                        'successful_message' => 'Data telah diperbarui',
+                    ]);
+                }else{
+                    return redirect()->route('info.home')->with([
+                        'failed_message' => 'Data gagal diperbarui',
+                    ]);
+                }
             }
+        } catch (\Throwable $th) {
+            return redirect()->route('info.home')->with([
+                'failed_message' => $th->getMessage(),
+            ]);
         }
+        
     }
 
     /**
@@ -150,48 +155,25 @@ class InfoController extends Controller
      */
     public function destroy($id)
     {
-        Education::find($id)->delete();
-        return redirect()->route('education.index')
-            -> with('success', 'Edukasi berhasil dihapus');
-    }
-
-    public function publicView(){
-        $education = Education::paginate(8);
-        return view('pages.education', compact(['education']));
-    }
-
-    public function publicDetailView($id){
-        $education = Education::where('slug','=',$id)->get()->first();
-        return view('pages.detail_education', compact('education'));
+        try {
+            Info::find($id)->delete();
+            return redirect()->route('info.home')->with([
+                'successful_message' => 'Data berhasil dihapus',
+            ]);
+        } catch (\Throwable $th) {
+            return redirect()->route('info.home')->with([
+                'failed_message' => $th->getMessage(),
+            ]);
+        }
+        
     }
 
     public function search(Request $request){
-        // Get the search value from the request
         $search = $request->input('search');
-
-        // Search in the title and body columns from the posts table
-        $education = Education::query()
+        $info = Info::query()
             ->where('title', 'LIKE', "%{$search}%")
-            ->paginate(10);
-
-        $education->appends($request->only(['_token', 'search']));
-
-        // Return the search view with the resluts compacted
-        return view('pages.educations.index', compact(['education']));
+            ->paginate(5);
+        return view('admin.pages.info_pages', compact(['info']));
     }
 
-    public function publicSearch(Request $request){
-        // Get the search value from the request
-        $search = $request->input('search');
-
-        // Search in the title and body columns from the posts table
-        $education = Education::query()
-            ->where('title', 'LIKE', "%{$search}%")
-            ->paginate(8);
-
-        $education->appends($request->only(['_token', 'search']));
-
-        // Return the search view with the resluts compacted
-        return view('pages.education', compact('education'));
-    }
 }

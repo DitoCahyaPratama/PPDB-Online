@@ -13,7 +13,7 @@ class CheckLoginController extends Controller
         if (!Auth::check()) {
             return view('admin.layouts.login');
         }else{
-            return redirect()->route('studentdata.home');
+            return redirect()->route('dashboard.home');
         }
     }
 }

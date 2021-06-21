@@ -26,21 +26,10 @@ class SelectionAchievementsController extends Controller
         }else {
             $departement = 'Teknik Elektronika Industri';
         }
-        // $achievData=DB::table('selection_achievements')
-        // ->select(
-        // 'selection_achievements.*',
-        // 'achievements1.name AS achievements1',
-        // 'achievements2.name AS achievements2',
-        // 'achievements3.name AS achievements3',
-        // 'students.name AS nameStudents')
-        // ->join('achievements AS achievements1','achievements1.id','=','selection_achievements.achievement_id_1')
-        // ->join('achievements AS achievements2','achievements2.id','=','selection_achievements.achievement_id_2')
-        // ->join('achievements AS achievements3','achievements3.id','=','selection_achievements.achievement_id_3')
-        // ->join('students','students.id','=','selection_achievements.student_id')
-        // ->where('department_id','=',$depId)
-        // ->get();
         $achievData=SelectionAchievement::with(['student','achievement1','achievement2','achievement3'])->where('department_id','=',$depId)->get();
-        return view('admin.pages.selection_achievement_pages',compact('departement','achievData'));
+        $countAccept=SelectionAchievement::where('department_id','=',$depId)->where('status','=',1)->count();
+        $countDecline=SelectionAchievement::where('department_id','=',$depId)->where('status','=',2)->count();
+        return view('admin.pages.selection_achievement_pages',compact('departement','achievData','countAccept','countDecline'));
     }
 
     /**
@@ -72,19 +61,6 @@ class SelectionAchievementsController extends Controller
      */
     public function show($id)
     {
-        // $achievData=DB::table('selection_achievements')
-        // ->select(
-        // 'selection_achievements.*',
-        // 'achievements1.name AS achievements1','achievements1.photo AS achievementsPhoto1',
-        // 'achievements2.name AS achievements2','achievements2.photo AS achievementsPhoto2',
-        // 'achievements3.name AS achievements3','achievements3.photo AS achievementsPhoto3',
-        // 'students.name AS nameStudents')
-        // ->join('achievements AS achievements1','achievements1.id','=','selection_achievements.achievement_id_1')
-        // ->join('achievements AS achievements2','achievements2.id','=','selection_achievements.achievement_id_2')
-        // ->join('achievements AS achievements3','achievements3.id','=','selection_achievements.achievement_id_3')
-        // ->join('students','students.id','=','selection_achievements.student_id')
-        // ->where('selection_achievements.id','=',$id)
-        // ->first();
         $achievData=SelectionAchievement::with(['student','achievement1','achievement2','achievement3'])->where('selection_achievements.id','=',$id)->first();
         return view('admin.pages.selection_detail_achievement_pages',compact('achievData'));
     }
@@ -110,10 +86,24 @@ class SelectionAchievementsController extends Controller
     public function update(Request $request, $id,$departementId,$status)
     {
         try {
-            SelectionAchievement::where('id','=', $id)->update(array('status' => $status));
-            return redirect()->route('selectionachievement.home',['departementId'=>$departementId])->with([
-                'successful_message' => 'Data Seleksi Prestasi berhasil Diupdate',
-            ]);
+            $countAccept=SelectionAchievement::where('department_id','=',$departementId)->where('status','=',1)->count();
+            if ($status == 1) {
+                if ($countAccept == 0) {
+                    return redirect()->route('selectionachievement.home',['departementId'=>$departementId])->with([
+                        'failed_message' => 'Kuota sudah sudah penuh',
+                    ]);
+                }else{
+                    SelectionAchievement::where('id','=', $id)->update(array('status' => 1));
+                        return redirect()->route('selectionachievement.home',['departementId'=>$departementId])->with([
+                        'successful_message' => 'Data Seleksi Prestasi berhasil Diupdate',
+                    ]);
+                }
+            }else{
+                SelectionAchievement::where('id','=', $id)->update(array('status' => 2));
+                        return redirect()->route('selectionachievement.home',['departementId'=>$departementId])->with([
+                        'successful_message' => 'Data Seleksi Prestasi berhasil Diupdate',
+                ]);
+            }
         } catch (\Throwable $th) {
             return redirect()->route('selectionachievement.home',['departementId'=>$departementId])->with([
                 'failed_message' => $th->getMessage(),

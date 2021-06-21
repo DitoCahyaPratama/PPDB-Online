@@ -17,6 +17,9 @@
             <h6 class="m-0 font-weight-bold text-primary">Data Prestasi Calon Siswa {{ $departement }}</h6>
         </div>
         <div class="card-body">
+            <h6>Jumlah yang diterima : {{$countAccept}} / 50</h6>
+            <h6>Jumlah yang ditolak : {{$countDecline}}</h6>
+            <hr>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>

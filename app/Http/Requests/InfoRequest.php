@@ -26,7 +26,7 @@ class InfoRequest extends FormRequest
         return [
             'title' => 'required',
             'description' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
         ];
     }
 }
