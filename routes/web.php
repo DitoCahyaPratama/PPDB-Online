@@ -55,7 +55,7 @@ Route::group(['middleware' => 'auth'], function(){
             });
             Route::prefix('/selectionreports')->group(function () {
                 Route::get('/{departementId}', [App\Http\Controllers\SelectionReportsController::class, 'index'])->name('selectionreports.home');
-                Route::get('/finalization/{departementId}/{status}', [App\Http\Controllers\SelectionReportsController::class, 'update'])->name('selectionreports.finalization');
+                Route::get('/finalization/{departementId}', [App\Http\Controllers\SelectionReportsController::class, 'update'])->name('selectionreports.finalization');
             });
             Route::prefix('/config')->group(function () {
                 Route::get('/', [App\Http\Controllers\ConfigController::class, 'index'])->name('config.home');
@@ -68,6 +68,7 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('/show/{id}', [App\Http\Controllers\InfoController::class, 'show'])->name('info.detail');
                 Route::get('/show/edit/{id}', [App\Http\Controllers\InfoController::class, 'edit'])->name('info.editform');
                 Route::post('/update/{id}', [App\Http\Controllers\InfoController::class, 'update'])->name('info.update');
+                Route::get('/search', [App\Http\Controllers\InfoController::class, 'search'])->name('info.search');
             });
         });
         Route::get('/logoutAdmin',[App\Http\Controllers\Auth\LogoutController::class, 'logoutAdmin']);

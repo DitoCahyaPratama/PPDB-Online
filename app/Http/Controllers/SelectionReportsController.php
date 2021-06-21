@@ -32,7 +32,6 @@ class SelectionReportsController extends Controller
         ->join('students','students.id','=','reports.student_id')
         ->where('department_id','=',$depId)
         ->orderBy('avg','desc')
-        ->limit(50)
         ->get();
         $countStudents=SelectionReport::where('department_id','=',$depId)->count();
         $countFinalization=SelectionReport::where('department_id','=',$depId)->where('status','=',1)->count();
@@ -90,10 +89,11 @@ class SelectionReportsController extends Controller
      * @param  \App\Models\SelectionReport  $selectionReport
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$departementId,$status)
+    public function update(Request $request,$departementId)
     {
         try {
-            SelectionReport::where('department_id','=', $departementId)->orderBy('avg','desc')->take(50)->update(array('status' => $status));
+            SelectionReport::where('department_id','=', $departementId)->orderBy('avg','desc')->take(1)->update(array('status' => 1));
+            SelectionReport::where('department_id','=', $departementId)->where('status','=',0)->update(array('status' => 2));
             return redirect()->route('selectionreports.home',['departementId'=>$departementId])->with([
                 'successful_message' => 'Data Seleksi berhasil Difinalisasi',
             ]);

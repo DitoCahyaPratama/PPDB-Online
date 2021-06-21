@@ -32,6 +32,11 @@
             Tambah Info
         </button>
         <hr>
+        <form action="{{route('info.search')}}" method="GET">
+            <h6>Cari info : <input class="form-control" name="search"></h6>
+            <input type="submit" class=" btn btn-success" value="Cari">
+        </form>
+        <br>
         <div class="table-responsive">
             <table class="table table-bordered" width="100%" cellspacing="0">
                 <thead>

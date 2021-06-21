@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Info;
 use App\Http\Requests\InfoRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class InfoController extends Controller
@@ -167,43 +168,12 @@ class InfoController extends Controller
         
     }
 
-    public function publicView(){
-        $education = Education::paginate(8);
-        return view('pages.education', compact(['education']));
-    }
-
-    public function publicDetailView($id){
-        $education = Education::where('slug','=',$id)->get()->first();
-        return view('pages.detail_education', compact('education'));
-    }
-
     public function search(Request $request){
-        // Get the search value from the request
         $search = $request->input('search');
-
-        // Search in the title and body columns from the posts table
-        $education = Education::query()
+        $info = Info::query()
             ->where('title', 'LIKE', "%{$search}%")
-            ->paginate(10);
-
-        $education->appends($request->only(['_token', 'search']));
-
-        // Return the search view with the resluts compacted
-        return view('pages.educations.index', compact(['education']));
+            ->paginate(5);
+        return view('admin.pages.info_pages', compact(['info']));
     }
 
-    public function publicSearch(Request $request){
-        // Get the search value from the request
-        $search = $request->input('search');
-
-        // Search in the title and body columns from the posts table
-        $education = Education::query()
-            ->where('title', 'LIKE', "%{$search}%")
-            ->paginate(8);
-
-        $education->appends($request->only(['_token', 'search']));
-
-        // Return the search view with the resluts compacted
-        return view('pages.education', compact('education'));
-    }
 }
