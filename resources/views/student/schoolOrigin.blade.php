@@ -133,10 +133,6 @@
     </section>
 
     <section class="hide" id="editPendidikan">
-<!--        --><?php
-//        $query_ambil = _run("SELECT * FROM educations WHERE user_id='".$id."'");
-//        $data_ambil = _get($query_ambil);
-//        ?>
         <div class="container">
             <ul class="breadcrumb">
                 <li class="breadcrumbs">
@@ -146,7 +142,8 @@
             <h4>Perbarui Data Pendidikan</h4>
             <p>Menampilkan form untuk melengkapi data pendidikan</p>
             <hr>
-            <form action="server.php?p=updatePendidikan" method="POST">
+            <form action="student.updateSchoolorigin" method="POST">
+                @csrf
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <div style="border: dotted; padding: 20px; margin: 10px">
@@ -154,28 +151,28 @@
                                 Kolom dengan tanda * harus diisi.
                             </div>
                             <div class="form-group">
-                                <label for="nama_sekolah">Nama Sekolah <span class="required">*</span></label>
-                                <input type="text" class="form-control" name="nama_sekolah" placeholder="Nama Sekolah ..." required="" value="">
+                                <label for="name">Nama Sekolah <span class="required">*</span></label>
+                                <input type="text" class="form-control" name="name" placeholder="Nama Sekolah ..." required="" value="">
                             </div>
                             <div class="form-group">
-                                <label for="alamat_sekolah">Alamat<span class="required">*</span></label>
-                                <textarea name="alamat_sekolah" class="form-control" placeholder="Alamat ..."></textarea>
+                                <label for="address">Alamat<span class="required">*</span></label>
+                                <textarea name="address" class="form-control" placeholder="Alamat ..."></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="tahun_lulus">Tahun Lulus <span class="required">*</span></label>
-                                <select name="tahun_lulus" class="form-control" required="">
+                                <label for="graduation_year">Tahun Lulus <span class="required">*</span></label>
+                                <select name="graduation_year" class="form-control" required="">
                                     <option value="">Pilih tahun lulus...</option>
                                     @for ($x=date('Y'); $x>=2000; $x--)
-                                        <option value="{{$x}}" {{$schoolorigin->graduation_year == $x ? 'selected' : ''}}>{{$x}}</option>
+                                        <option value="{{$x}}" {{$schoolorigin ? ($schoolorigin->graduation_year == $x ? "selected" : "") : ''}}>{{$x}}</option>
                                     @endfor
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="jenis_sekolah">Jenis Sekolah <span class="required">*</span></label>
-                                <select name="jenis_sekolah" class="form-control" required="">
+                                <label for="type">Jenis Sekolah <span class="required">*</span></label>
+                                <select name="type" class="form-control" required="">
                                     <option value="">Pilih jenis sekolah...</option>
                                     <option value="Negeri">Negeri</option>
-                                    <option value="Swasta">>Swasta</option>
+                                    <option value="Swasta">Swasta</option>
                                     <option value="Maarif">Ma'arif</option>
                                 </select>
                             </div>
@@ -188,13 +185,13 @@
                                 <select name="province_id" class="form-control" onchange="loadKab()" id="provinsi" required="">
                                     <option value="">Pilih Provinsi...</option>
                                     @foreach($provinces as $data)
-                                        <option value="{{$data->id}}" {{$student ? ($student->provinces_id == $data->id  ? "selected" : "") : "" }}>{{$data->name}}</option>
+                                        <option value="{{$data->id}}" {{$schoolorigin ? ($schoolorigin->provinces_id == $data->id  ? "selected" : "") : "" }}>{{$data->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="regency_id">Kabupaten <span class="required">*</span></label>
-                                <input type="hidden" id="regency_id" value="{{$student ? $student->regency_id : ""}}">
+                                <input type="hidden" id="regency_id" value="{{$schoolorigin ? $schoolorigin->regency_id : ""}}">
                                 <select name="regency_id" class="form-control" required="" id="kabupaten" onchange="loadKec()">
                                     <option value="">Pilih Kabupaten...</option>
                                 </select>
@@ -202,7 +199,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="district_id">Kecamatan <span class="required">*</span></label>
-                                <input type="hidden" id="district_id" value="{{$student ? $student->district_id : ""}}">
+                                <input type="hidden" id="district_id" value="{{$schoolorigin ? $schoolorigin->district_id : ""}}">
                                 <select name="district_id" class="form-control" required="" id="kecamatan" onchange="loadDesa()">
                                     <option value="">Pilih Kecamatan...</option>
                                 </select>
@@ -210,7 +207,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="village_id">Desa <span class="required">*</span></label>
-                                <input type="hidden" id="village_id" value="{{ $student ? $student->village_id : "" }}">
+                                <input type="hidden" id="village_id" value="{{ $schoolorigin ? $schoolorigin->village_id : "" }}">
                                 <select name="village_id" class="form-control" required="" id="desa">
                                     <option value="">Pilih Desa...</option>
                                 </select>

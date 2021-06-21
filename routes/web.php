@@ -78,8 +78,12 @@ Route::group(['middleware' => 'auth'], function(){
             });
             Route::get('/biodata', [\App\Http\Controllers\StudentController::class, 'index'])->name('student.biodata');
             Route::post('/biodata', [\App\Http\Controllers\StudentController::class, 'store'])->name('student.updateBiodata');
+            Route::post('/upload/photo', [\App\Http\Controllers\StudentController::class, 'uploadPhoto'])->name('student.uploadPhoto');
 
             Route::get('/sekolah-asal', [\App\Http\Controllers\SchoolOriginController::class, 'index'])->name('student.schoolorigin');
+            Route::post('/sekolah-asal', [\App\Http\Controllers\SchoolOriginController::class, 'store'])->name('student.updateSchoolorigin');
+            Route::post('/upload/skl', [\App\Http\Controllers\SchoolOriginController::class, 'uploadSkl'])->name('student.uploadSKL');
+
             Route::get('/kesehatan', [\App\Http\Controllers\HealthController::class, 'index'])->name('student.health');
             Route::get('/prestasi', [\App\Http\Controllers\AchievementController::class, 'index'])->name('student.achievement');
             Route::get('/rapor', [\App\Http\Controllers\ReportController::class, 'index'])->name('student.report');
