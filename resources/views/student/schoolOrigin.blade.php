@@ -166,7 +166,7 @@
                                 <select name="tahun_lulus" class="form-control" required="">
                                     <option value="">Pilih tahun lulus...</option>
                                     @for ($x=date('Y'); $x>=2000; $x--)
-                                        <option value="{{$x}}" {{$schoolorigin->graduation_year == $x ? 'selected' : ''}}><?php echo $x ?></option>
+                                        <option value="{{$x}}" {{$schoolorigin->graduation_year == $x ? 'selected' : ''}}>{{$x}}</option>
                                     @endfor
                                 </select>
                             </div>

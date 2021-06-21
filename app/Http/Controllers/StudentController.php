@@ -25,11 +25,11 @@ class StudentController extends Controller
         $student = Student::where(['user_id' => $id])->first();
         $provinces = Province::all();
         $religions = Religion::all();
-        $studentReligion = Religion::find($student->religion_id);
-        $studentVillage = Village::find($student->village_id);
-        $studentDistrict = District::find($student->district_id);
-        $studentRegency = Regency::find($student->regency_id);
-        $studentProvince = Province::find($student->province_id);
+        $studentReligion = $student ? Religion::find($student->religion_id) : "";
+        $studentVillage = $student ? Village::find($student->village_id) : "";
+        $studentDistrict = $student ? District::find($student->district_id) : "";
+        $studentRegency = $student ? Regency::find($student->regency_id) : "";
+        $studentProvince = $student ? Province::find($student->province_id) : "";
         return view('student.biodata', compact(['student', 'provinces', 'religions', 'studentReligion', 'studentVillage', 'studentDistrict', 'studentRegency', 'studentProvince']));
     }
 
@@ -53,7 +53,7 @@ class StudentController extends Controller
     {
         $validated = $request->validated();
 
-        $biodata = Student::create(array_merge(
+        $biodata = Student::updateOrCreate(array_merge(
             $validated,
             [
                 'nisn' => $request->nisn,

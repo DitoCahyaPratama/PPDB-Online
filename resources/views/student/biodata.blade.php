@@ -24,59 +24,59 @@
                             <tbody>
                             <tr>
                                 <th width="180px">NISN</th>
-                                <td>{{$student->nisn}}</td>
+                                <td>{{$student ? $student->nisn : ""}}</td>
                             </tr>
                             <tr>
                                 <th>Nama siswa</th>
-                                <td>{{$student->name}}</td>
+                                <td>{{$student ? $student->name : ""}}</td>
                             </tr>
                             <tr>
                                 <th>NIK</th>
-                                <td>{{$student->nik}}</td>
+                                <td>{{$student ? $student->nik : ""}}</td>
                             </tr>
                             <tr>
                                 <th>Jenis Kelamin</th>
-                                <td>{{$student->gender}}</td>
+                                <td>{{$student ? $student->gender : ""}}</td>
                             </tr>
                             <tr>
                                 <th>Agama</th>
-                                <td>{{$studentReligion->name}}</td>
+                                <td>{{$student ? $studentReligion->name : ""}}</td>
                             </tr>
                             <tr>
                                 <th>Tempat lahir</th>
-                                <td>{{$student->place_born}}</td>
+                                <td>{{$student ? $student->place_born : ""}}</td>
                             </tr>
                             <tr>
                                 <th>Tanggal Lahir</th>
-                                <td>{{$student->date_born}}</td>
+                                <td>{{$student ? $student->date_born : ""}}</td>
                             </tr>
                             <tr>
                                 <th>Alamat</th>
-                                <td>{{$student->address}}</td>
+                                <td>{{$student ? $student->address : ""}}</td>
                             </tr>
                             <tr>
                                 <th>Desa</th>
-                                <td>{{ucwords($studentVillage->name) }}</td>
+                                <td>{{$student ? ucwords($studentVillage->name) : "" }}</td>
                             </tr>
                             <tr>
                                 <th>Kecamatan</th>
-                                <td>{{ucwords($studentDistrict->name)}}</td>
+                                <td>{{$student ? ucwords($studentDistrict->name) : ""}}</td>
                             </tr>
                             <tr>
                                 <th>Kab/Kota</th>
-                                <td>{{ucwords($studentRegency->name)}}</td>
+                                <td>{{$student ? ucwords($studentRegency->name) : ""}}</td>
                             </tr>
                             <tr>
                                 <th>Provinsi</th>
-                                <td>{{ucwords($studentProvince->name)}}</td>
+                                <td>{{$student ? ucwords($studentProvince->name) : ""}}</td>
                             </tr>
                             <tr>
                                 <th>Email</th>
-                                <td>{{$student->email}}</td>
+                                <td>{{$student ? $student->email : ""}}</td>
                             </tr>
                             <tr>
                                 <th>No. Telepon</th>
-                                <td>{{$student->phone_number}}</td>
+                                <td>{{$student ? $student->phone_number : ""}}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -229,11 +229,11 @@
                             <div style="border: dotted; padding: 20px; margin: 10px; margin-top: 30px">
                                 <div class="form-group">
                                     <label for="email">Email <span class="required">*</span></label>
-                                    <input type="email" class="form-control" name="email" placeholder="Email ..." required="" value="">
+                                    <input type="email" class="form-control" name="email" placeholder="Email ..." required="" value="{{$student ? $student->email : ""}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="phone_number">No. Telepon</label>
-                                    <input type="text" class="form-control" name="phone_number" placeholder="No. Telepon ..." value="">
+                                    <input type="text" class="form-control" name="phone_number" placeholder="No. Telepon ..." value="{{$student ? $student->phone_number : ""}}">
                                 </div>
                             </div>
                         </div>

@@ -2,7 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
+use App\Models\Province;
+use App\Models\Regency;
+use App\Models\Religion;
+use App\Models\SchoolOrigin;
+use App\Models\Student;
+use App\Models\Village;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SchoolOriginController extends Controller
 {
@@ -13,7 +21,15 @@ class SchoolOriginController extends Controller
      */
     public function index()
     {
-        return view('student.schoolOrigin');
+        $id = Auth::id();
+        $student = Student::where(['user_id' => $id])->first();
+        $schoolorigin = SchoolOrigin::where(['student_id' => $student->id])->first();
+        $provinces = Province::all();
+        $schooloriginVillage = Village::find($schoolorigin->village_id);
+        $schooloriginDistrict = District::find($schoolorigin->district_id);
+        $schooloriginRegency = Regency::find($schoolorigin->regency_id);
+        $schooloriginProvince = Province::find($schoolorigin->province_id);
+        return view('student.schoolOrigin', compact(['schoolorigin', 'provinces', 'schooloriginVillage', 'schooloriginDistrict', 'schooloriginRegency', 'schooloriginProvince']));
     }
 
     /**
