@@ -165,14 +165,9 @@
                                 <label for="tahun_lulus">Tahun Lulus <span class="required">*</span></label>
                                 <select name="tahun_lulus" class="form-control" required="">
                                     <option value="">Pilih tahun lulus...</option>
-{{--                                    <?php--}}
-{{--                                    $now =  date('Y');--}}
-{{--                                    for($x=$now; $x>=2000; $x--){--}}
-{{--                                    ?>--}}
-{{--                                    <option value="<?php echo $x ?>" <?php if($data_ambil['tahun_lulus'] == $x){?> selected <?php } ?>><?php echo $x ?></option>--}}
-{{--                                    <?php--}}
-{{--                                    }--}}
-{{--                                    ?>--}}
+                                    @for ($x=date('Y'); $x>=2000; $x--)
+                                        <option value="{{$x}}" {{$schoolorigin->graduation_year == $x ? 'selected' : ''}}><?php echo $x ?></option>
+                                    @endfor
                                 </select>
                             </div>
                             <div class="form-group">
@@ -189,42 +184,37 @@
                     <div class="col-md-6 col-sm-12">
                         <div style="border: dotted; padding: 20px; margin: 10px">
                             <div class="form-group">
-                                <label for="provinsi_sekolah">Provinsi <span class="required">*</span></label>
-                                <select name="provinsi_sekolah" class="form-control" onchange="loadKab()" id="provinsi" required="">
+                                <label for="province_id">Provinsi <span class="required">*</span></label>
+                                <select name="province_id" class="form-control" onchange="loadKab()" id="provinsi" required="">
                                     <option value="">Pilih Provinsi...</option>
-{{--                                    <?php--}}
-{{--                                    $query = _run("SELECT * FROM provinces");--}}
-{{--                                    while($data = _get($query)){--}}
-{{--                                    ?>--}}
-{{--                                    <option value="<?php echo $data['id'] ?>" <?php if($data_ambil['province_id'] == $data['id']){?> selected <?php } ?>><?php echo $data['name'] ?></option>--}}
-{{--                                    <?php--}}
-{{--                                    }--}}
-{{--                                    ?>--}}
+                                    @foreach($provinces as $data)
+                                        <option value="{{$data->id}}" {{$student ? ($student->provinces_id == $data->id  ? "selected" : "") : "" }}>{{$data->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="kabupaten_sekolah">Kabupaten <span class="required">*</span></label>
-{{--                                <input type="hidden" id="regency_id" value="<?php echo $data_ambil['regency_id'] ?>">--}}
-{{--                                <select name="kabupaten_sekolah" class="form-control" required="" id="kabupaten" onchange="loadKec()">--}}
-{{--                                    <option value="">Pilih Kabupaten...</option>--}}
-{{--                                </select>--}}
-{{--                                <span class="badge badge-info hide" id="loading_kota">Loading Kota</span>--}}
+                                <label for="regency_id">Kabupaten <span class="required">*</span></label>
+                                <input type="hidden" id="regency_id" value="{{$student ? $student->regency_id : ""}}">
+                                <select name="regency_id" class="form-control" required="" id="kabupaten" onchange="loadKec()">
+                                    <option value="">Pilih Kabupaten...</option>
+                                </select>
+                                <span class="badge badge-info hide" id="loading_kota">Loading Kota</span>
                             </div>
                             <div class="form-group">
-                                <label for="kecamatan_sekolah">Kecamatan <span class="required">*</span></label>
-{{--                                <input type="hidden" id="district_id" value="<?php echo $data_ambil['district_id'] ?>">--}}
-{{--                                <select name="kecamatan_sekolah" class="form-control" required="" id="kecamatan" onchange="loadDesa()">--}}
-{{--                                    <option value="">Pilih Kecamatan...</option>--}}
-{{--                                </select>--}}
-{{--                                <span class="badge badge-info hide" id="loading_kecamatan">Loading Kecamatan</span>--}}
+                                <label for="district_id">Kecamatan <span class="required">*</span></label>
+                                <input type="hidden" id="district_id" value="{{$student ? $student->district_id : ""}}">
+                                <select name="district_id" class="form-control" required="" id="kecamatan" onchange="loadDesa()">
+                                    <option value="">Pilih Kecamatan...</option>
+                                </select>
+                                <span class="badge badge-info hide" id="loading_kecamatan">Loading Kecamatan</span>
                             </div>
                             <div class="form-group">
-                                <label for="desa_sekolah">Desa <span class="required">*</span></label>
-{{--                                <input type="hidden" id="village_id" value="<?php echo $data_ambil['village_id'] ?>">--}}
-{{--                                <select name="desa_sekolah" class="form-control" required="" id="desa">--}}
-{{--                                    <option value="">Pilih Desa...</option>--}}
-{{--                                </select>--}}
-{{--                                <span class="badge badge-info hide" id="loading_desa">Loading Desa</span>--}}
+                                <label for="village_id">Desa <span class="required">*</span></label>
+                                <input type="hidden" id="village_id" value="{{ $student ? $student->village_id : "" }}">
+                                <select name="village_id" class="form-control" required="" id="desa">
+                                    <option value="">Pilih Desa...</option>
+                                </select>
+                                <span class="badge badge-info hide" id="loading_desa">Loading Desa</span>
                             </div>
                         </div>
                     </div>
@@ -263,98 +253,101 @@
                 edit_pendidikan.className = 'hide';
             }
         }
-        // function loadKab(){
-        //     var provinsi = $('#provinsi').val();
-        //     var regency_id = $('#regency_id').val();
-        //     $.ajax({
-        //         url: 'server.php?p=getKabupaten',
-        //         data: {
-        //             provinsi:provinsi,
-        //             regency_id:regency_id
-        //         },
-        //         type: 'POST',
-        //         beforeSend:function(){
-        //             $("#kabupaten").attr("disabled",true);
-        //             $("#loading_kota").show();
-        //         },
-        //         success:function(data){
-        //             $("#loading_kota").hide();
-        //             $("#kabupaten").removeAttr("disabled");
-        //             if(data == ""){
-        //                 $("#kabupaten").html("<option value=''>Pilih Kabupaten...</option>");
-        //                 $("#kecamatan").html("<option value=''>Pilih Kecamatan...</option>");
-        //                 $("#desa").html("<option value=''>Pilih Desa...</option>");
-        //             }else{
-        //                 $("#kabupaten").html("<option value=''>Pilih Kabupaten...</option>"+data);
-        //                 $("#kecamatan").html("<option value=''>Pilih Kecamatan...</option>");
-        //                 $("#desa").html("<option value=''>Pilih Desa...</option>");
-        //             }
-        //             loadKec();
-        //         },
-        //         error:function(err){
-        //             alert(err);
-        //         }
-        //     })
-        // }
-        // function loadKec(){
-        //     var kabupaten = $('#kabupaten').val();
-        //     var district_id = $('#district_id').val();
-        //     $.ajax({
-        //         url: 'server.php?p=getKecamatan',
-        //         data: {
-        //             kabupaten:kabupaten,
-        //             district_id:district_id
-        //         },
-        //         type: 'POST',
-        //         beforeSend:function(){
-        //             $("#kecamatan").attr("disabled",true);
-        //             $("#loading_kecamatan").show();
-        //         },
-        //         success:function(data){
-        //             $("#loading_kecamatan").hide();
-        //             $("#kecamatan").removeAttr("disabled");
-        //             if(data == ""){
-        //                 $("#kecamatan").html("<option value=''>Pilih Kecamatan...</option>");
-        //                 $("#desa").html("<option value=''>Pilih Desa...</option>");
-        //             }else{
-        //                 $("#kecamatan").html("<option value=''>Pilih Kecamatan...</option>"+data);
-        //                 $("#desa").html("<option value=''>Pilih Desa...</option>");
-        //             }
-        //             loadDesa();
-        //         },
-        //         error:function(err){
-        //             alert(err);
-        //         }
-        //     })
-        // }
-        // function loadDesa(){
-        //     var kecamatan = $('#kecamatan').val();
-        //     var village_id = $('#village_id').val();
-        //     $.ajax({
-        //         url: 'server.php?p=getDesa',
-        //         data: {
-        //             kecamatan:kecamatan,
-        //             village_id:village_id
-        //         },
-        //         type: 'POST',
-        //         beforeSend:function(){
-        //             $("#desa").attr("disabled",true);
-        //             $("#loading_desa").show();
-        //         },
-        //         success:function(data){
-        //             $("#loading_desa").hide();
-        //             $("#desa").removeAttr("disabled");
-        //             if(data == ""){
-        //                 $("#desa").html("<option value=''>Pilih Desa...</option>");
-        //             }else{
-        //                 $("#desa").html("<option value=''>Pilih Desa...</option>"+data);
-        //             }
-        //         },
-        //         error:function(err){
-        //             alert(err);
-        //         }
-        //     })
-        // }
+        function loadKab(){
+            var provinsi = $('#provinsi').val();
+            var regency_id = $('#regency_id').val();
+            $.ajax({
+                url: '{{route('region.getRegencies')}}',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "provinsi":provinsi,
+                    "regency_id":regency_id
+                },
+                type: 'POST',
+                beforeSend:function(){
+                    $("#kabupaten").attr("disabled",true);
+                    $("#loading_kota").show();
+                },
+                success:function(data){
+                    $("#loading_kota").hide();
+                    $("#kabupaten").removeAttr("disabled");
+                    if(data == ""){
+                        $("#kabupaten").html("<option value=''>Pilih Kabupaten...</option>");
+                        $("#kecamatan").html("<option value=''>Pilih Kecamatan...</option>");
+                        $("#desa").html("<option value=''>Pilih Desa...</option>");
+                    }else{
+                        $("#kabupaten").html("<option value=''>Pilih Kabupaten...</option>"+data);
+                        $("#kecamatan").html("<option value=''>Pilih Kecamatan...</option>");
+                        $("#desa").html("<option value=''>Pilih Desa...</option>");
+                    }
+                    loadKec();
+                },
+                error:function(err){
+                    console.log(err)
+                }
+            })
+        }
+        function loadKec(){
+            var kabupaten = $('#kabupaten').val();
+            var district_id = $('#district_id').val();
+            $.ajax({
+                url: '{{route('region.getDistricts')}}',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    kabupaten:kabupaten,
+                    district_id:district_id
+                },
+                type: 'POST',
+                beforeSend:function(){
+                    $("#kecamatan").attr("disabled",true);
+                    $("#loading_kecamatan").show();
+                },
+                success:function(data){
+                    $("#loading_kecamatan").hide();
+                    $("#kecamatan").removeAttr("disabled");
+                    if(data == ""){
+                        $("#kecamatan").html("<option value=''>Pilih Kecamatan...</option>");
+                        $("#desa").html("<option value=''>Pilih Desa...</option>");
+                    }else{
+                        $("#kecamatan").html("<option value=''>Pilih Kecamatan...</option>"+data);
+                        $("#desa").html("<option value=''>Pilih Desa...</option>");
+                    }
+                    loadDesa();
+                },
+                error:function(err){
+                    console.log(err)
+                }
+            })
+        }
+        function loadDesa(){
+            var kecamatan = $('#kecamatan').val();
+            var village_id = $('#village_id').val();
+            $.ajax({
+                url: '{{route('region.getVillages')}}',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    kecamatan:kecamatan,
+                    village_id:village_id
+                },
+                type: 'POST',
+                beforeSend:function(){
+                    $("#desa").attr("disabled",true);
+                    $("#loading_desa").show();
+                },
+                success:function(data){
+                    $("#loading_desa").hide();
+                    $("#desa").removeAttr("disabled");
+                    if(data == ""){
+                        $("#desa").html("<option value=''>Pilih Desa...</option>");
+                    }else{
+                        $("#desa").html("<option value=''>Pilih Desa...</option>"+data);
+                    }
+                },
+                error:function(err){
+                    console.log(err)
+                }
+            })
+        }
         function perbesar(image){
             Swal.fire({
                 imageUrl: image,

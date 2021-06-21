@@ -10,7 +10,9 @@ class Student extends Model
     // use HasFactory;
     protected $table='students';
     protected $fillable = [
+        'nisn',
         'name',
+        'email',
         'address',
         'nik',
         'place_born',
@@ -18,7 +20,7 @@ class Student extends Model
         'gender',
         'user_id',
         'religion_id',
-        'village_id ',
+        'village_id',
         'district_id',
         'regency_id',
         'province_id',

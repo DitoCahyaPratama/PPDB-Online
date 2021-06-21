@@ -11,7 +11,7 @@
                         <a href="{{route('student.biodata')}}" class="col-md-4 col-sm-12">
                             <div class="well well-white">
                                 <h5><span class="badge badge-warning">1</span> Biodata</h5>
-                                <p>Mengisi/melengkapi biodata pendaftar</p>
+                                <p>Mengisi/melengkapi biodata siswa</p>
                                 <small><i>wajib diisi</i></small>
                                 @if($verifyBiodata)
                                 <span class="badge badge-success">Data sudah lengkap</span>
@@ -23,7 +23,7 @@
                         <a href="{{route('student.schoolorigin')}}" class="col-md-4 col-sm-12">
                             <div class="well well-white">
                                 <h5><span class="badge badge-warning">2</span> Data Asal Sekolah</h5>
-                                <p>Mengisi data sekolah asal pendaftar siswa</p>
+                                <p>Mengisi/melengkapi data sekolah asal siswa</p>
                                 <small><i>wajib diisi</i></small>
                                 @if(count($verifySchoolOrigin))
                                     <span class="badge badge-success">Data sudah lengkap</span>
@@ -32,9 +32,21 @@
                                 @endif
                             </div>
                         </a>
+                        <a href="{{route('student.health')}}" class="col-md-4 col-sm-12">
+                            <div class="well well-white">
+                                <h5><span class="badge badge-warning">3</span> Data Kesehatan</h5>
+                                <p>Mengisi/melengkapi data kesehatan siswa</p>
+                                <small><i>wajib diisi</i></small>
+                                @if(count($verifyHealth))
+                                    <span class="badge badge-success">Data sudah lengkap</span>
+                                @else
+                                    <span class="badge badge-warning">Data belum lengkap</span>
+                                @endif
+                            </div>
+                        </a>
                         <a href="{{route('student.achievement')}}" class="col-md-4 col-sm-12">
                             <div class="well well-white">
-                                <h5><span class="badge badge-warning">3</span> Data Prestasi</h5>
+                                <h5><span class="badge badge-warning">4</span> Data Prestasi</h5>
                                 <p>Jika anda akan mendaftar jalur prestasi silahkan masukkan data disini</p>
                                 <small><i>Dilakukan pada tanggal </i></small>
                             </div>
@@ -52,7 +64,7 @@
                                class="col-md-4 col-sm-12">
                                 <div class="well well-white">
                                     <h5><span class="badge badge-warning">5</span> Cetak Bukti Pendaftaran</h5>
-                                    <p>Mencetak bukti pendaftaran siswa</p>
+                                    <p>Cetak pendaftaran siswa, data ini digunakan untuk pendaftaran offline</p>
                                     <small><i>wajib dicetak</i></small>
                                 </div>
                             </a>
@@ -60,7 +72,7 @@
                             <a class="col-md-4 col-sm-12">
                                 <div class="well well-white">
                                     <h5><span class="badge badge-warning">5</span> Cetak Bukti Pendaftaran</h5>
-                                    <p>Mencetak bukti pendaftaran siswa</p>
+                                    <p>Cetak bukti pendaftaran siswa, data ini digunakan untuk pendaftaran offline</p>
                                     <span class="badge badge-warning">Lengkapi data terlebih dahulu</span>
                                 </div>
                             </a>

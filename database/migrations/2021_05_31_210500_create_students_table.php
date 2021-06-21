@@ -15,14 +15,14 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->char('NISN', 10);
+            $table->char('nisn', 10);
             $table->string('name');
             $table->string('email')->unique();
             $table->text('address');
             $table->string('nik');
             $table->string('place_born');
             $table->date('date_born');
-            $table->enum('gender',['laki-laki', 'perempuan']);
+            $table->enum('gender',['L', 'P']);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('religion_id');
@@ -36,7 +36,7 @@ class CreateStudentsTable extends Migration
             $table->char('province_id', 2);
             $table->foreign('province_id')->references('id')->on('provinces');
             $table->string('phone_number');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

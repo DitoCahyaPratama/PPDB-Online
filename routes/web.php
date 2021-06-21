@@ -75,11 +75,22 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('/', [App\Http\Controllers\DashboardController::class, 'student'])->name('dashboard.student');
             });
             Route::get('/biodata', [\App\Http\Controllers\StudentController::class, 'index'])->name('student.biodata');
+            Route::post('/biodata', [\App\Http\Controllers\StudentController::class, 'store'])->name('student.updateBiodata');
+
+            Route::get('/sekolah-asal', [\App\Http\Controllers\SchoolOriginController::class, 'index'])->name('student.schoolorigin');
+            Route::get('/kesehatan', [\App\Http\Controllers\HealthController::class, 'index'])->name('student.health');
             Route::get('/prestasi', [\App\Http\Controllers\AchievementController::class, 'index'])->name('student.achievement');
             Route::get('/rapor', [\App\Http\Controllers\ReportController::class, 'index'])->name('student.report');
-            Route::get('/sekolah-asal', [\App\Http\Controllers\SchoolOriginController::class, 'index'])->name('student.schoolorigin');
             Route::get('/bukti_penerimaan', [App\Http\Controllers\StudentController::class, 'bukti_penerimaan'])->name('bukti.penerimaan');
             Route::get('/bukti_pendaftaran', [App\Http\Controllers\StudentController::class, 'bukti_pendaftaran'])->name('bukti.pendaftaran');
+
+
+            Route::post('/get-provinces', [\App\Http\Controllers\RegionController::class, 'getProvincesById'])->name('region.getProvinces');
+            Route::post('/get-regencies', [\App\Http\Controllers\RegionController::class, 'getRegenciesById'])->name('region.getRegencies');
+            Route::post('/get-districts', [\App\Http\Controllers\RegionController::class, 'getDistrictsById'])->name('region.getDistricts');
+            Route::post('/get-villages', [\App\Http\Controllers\RegionController::class, 'getVillagesById'])->name('region.getVillages');
+
+
         });
     });
 });

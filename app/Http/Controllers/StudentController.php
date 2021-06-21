@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
+use App\Models\Province;
+use App\Models\Regency;
+use App\Models\Religion;
 use App\Models\Student;
+use App\Models\Village;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\BiodataRequest;
 
 class StudentController extends Controller
 {
@@ -14,7 +21,16 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return view('student.biodata');
+        $id = Auth::id();
+        $student = Student::where(['user_id' => $id])->first();
+        $provinces = Province::all();
+        $religions = Religion::all();
+        $studentReligion = Religion::find($student->religion_id);
+        $studentVillage = Village::find($student->village_id);
+        $studentDistrict = District::find($student->district_id);
+        $studentRegency = Regency::find($student->regency_id);
+        $studentProvince = Province::find($student->province_id);
+        return view('student.biodata', compact(['student', 'provinces', 'religions', 'studentReligion', 'studentVillage', 'studentDistrict', 'studentRegency', 'studentProvince']));
     }
 
     /**
@@ -33,9 +49,34 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BiodataRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $biodata = Student::create(array_merge(
+            $validated,
+            [
+                'nisn' => $request->nisn,
+                'name' => $request->name,
+                'email' => $request->email,
+                'address' => $request->address,
+                'nik' => $request->nik,
+                'place_born' => $request->place_born,
+                'date_born' => $request->date_born,
+                'gender' => $request->gender,
+                'religion_id' => $request->religion_id,
+                'regency_id' => $request->regency_id,
+                'village_id' => $request->village_id,
+                'district_id' => $request->district_id,
+                'province_id' => $request->province_id,
+                'phone_number' => $request->phone_number,
+                'user_id' => Auth::id(),
+            ],
+        ));
+
+        //jika data berhasil ditambahkan, akan kembali ke halaman utama
+        return redirect()->route('student.biodata')
+            ->with('success', 'Biodata berhasil diperbarui');
     }
 
     /**
