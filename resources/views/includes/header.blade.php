@@ -90,14 +90,14 @@
                                 <li class="active">
                                     <a href="{{route('home')}}">Home</a>
                                 </li>
-                                @role('2')
-                                <li><a href="#">Cetak Bukti</a>
-                                    <ul>
-                                        <li><a href="{{route('bukti.penerimaan')}}">Bukti Penerimaan</a></li>
-                                        <li><a href="{{route('bukti.pendaftaran')}}">Bukti Pendaftaran</a></li>
-                                    </ul>
-                                </li>
-                                @endrole
+{{--                                @role('2')--}}
+{{--                                <li><a href="#">Cetak Bukti</a>--}}
+{{--                                    <ul>--}}
+{{--                                        <li><a href="{{route('bukti.penerimaan')}}">Bukti Penerimaan</a></li>--}}
+{{--                                        <li><a href="{{route('bukti.pendaftaran')}}">Bukti Pendaftaran</a></li>--}}
+{{--                                    </ul>--}}
+{{--                                </li>--}}
+{{--                                @endrole--}}
                                 <li><a href="{{route('info')}}">Info Terkini</a>
                                 </li>
                                 <li><a href="{{route('contact')}}">Kontak Kami</a>

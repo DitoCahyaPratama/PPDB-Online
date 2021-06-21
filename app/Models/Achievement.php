@@ -12,8 +12,10 @@ class Achievement extends Model
     protected $fillable = [
         'student_id',
         'name',
+        'champion',
         'year',
         'level',
+        'type',
         'photo'
     ];
 }

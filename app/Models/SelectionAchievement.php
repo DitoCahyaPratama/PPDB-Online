@@ -10,7 +10,7 @@ class SelectionAchievement extends Model
     // use HasFactory;
     protected $table='selection_achievements';
     protected $fillable = [
-        'student_id ',
+        'student_id',
         'achievement_id_1',
         'achievement_id_2',
         'achievement_id_3',

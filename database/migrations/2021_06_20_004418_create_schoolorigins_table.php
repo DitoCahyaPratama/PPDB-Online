@@ -29,7 +29,7 @@ class CreateSchooloriginsTable extends Migration
             $table->char('province_id', 2);
             $table->foreign('province_id')->references('id')->on('provinces');
             $table->string('type');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

@@ -31,7 +31,7 @@ class RegionController extends Controller
         $htmlData = "";
         foreach ($regencies as $data)
         {
-            $selected = ($idRegency == $data->province_id) ? print("selected") : "";
+            $selected = ($idRegency == $data->id) ? "selected" : "";
             $htmlData .= '<option value="'.$data->id.'" '.$selected.'>'.$data->name.'</option>';
         }
         return $htmlData;
@@ -45,7 +45,7 @@ class RegionController extends Controller
         $htmlData = "";
         foreach ($districts as $data)
         {
-            $selected = ($idDistrict == $data->district_id) ? print("selected") : "";
+            $selected = ($idDistrict == $data->id) ? "selected" : "";
             $htmlData .= '<option value="'.$data->id.'" '.$selected.'>'.$data->name.'</option>';
         }
         return $htmlData;
@@ -59,7 +59,7 @@ class RegionController extends Controller
         $htmlData = "";
         foreach ($villages as $data)
         {
-            $selected = ($idVillage == $data->village_id) ? print("selected") : "";
+            $selected = ($idVillage == $data->id) ? "selected" : "";
             $htmlData .= '<option value="'.$data->id.'" '.$selected.'>'.$data->name.'</option>';
         }
         return $htmlData;

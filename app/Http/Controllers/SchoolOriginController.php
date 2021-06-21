@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SchoolOriginRequest;
 use App\Models\District;
 use App\Models\Province;
 use App\Models\Regency;
@@ -48,12 +49,12 @@ class SchoolOriginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SchoolOriginRequest $request)
     {
         $id = Auth::id();
         $student = Student::where(['user_id' => $id])->first();
         $validated = $request->validated();
-        $schoolOrigin = SchoolOrigin::updateOrCreate(array_merge(
+        $schoolOrigin = SchoolOrigin::updateOrCreate(['student_id' => $student->id], array_merge(
             $validated,
             [
                 'student_id' => $student->id,
@@ -69,8 +70,8 @@ class SchoolOriginController extends Controller
         ));
 
         //jika data berhasil ditambahkan, akan kembali ke halaman biodata
-        return redirect()->route('student.biodata')
-            ->with('success', 'Biodata berhasil diperbarui');
+        return redirect()->route('student.schoolorigin')
+            ->with('success', 'Sekolah asal berhasil diperbarui');
     }
 
     /**
@@ -116,5 +117,19 @@ class SchoolOriginController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function uploadSkl(Request $request){
+        $id = Auth::id();
+        $student = Student::where(['user_id' => $id])->first();
+        $imagename = $request->file('photo')->store('upload/student/skl', 'public');
+        $schoolorigin = SchoolOrigin::where('student_id', $student->id)->update(array_merge(
+            [
+                'photo' => $imagename,
+            ],
+        ));
+        //jika data berhasil ditambahkan, akan kembali ke halaman biodata
+        return redirect()->route('student.schoolorigin')
+            ->with('success', 'Scan SKL berhasil diperbarui');
     }
 }

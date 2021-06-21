@@ -19,9 +19,9 @@ class CreateSelectionAchievements extends Migration
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('achievement_id_1');
             $table->foreign('achievement_id_1')->references('id')->on('achievements');
-            $table->unsignedBigInteger('achievement_id_2');
+            $table->unsignedBigInteger('achievement_id_2')->nullable();
             $table->foreign('achievement_id_2')->references('id')->on('achievements');
-            $table->unsignedBigInteger('achievement_id_3');
+            $table->unsignedBigInteger('achievement_id_3')->nullable();
             $table->foreign('achievement_id_3')->references('id')->on('achievements');
             $table->unsignedBigInteger('department_id');
             $table->foreign('department_id')->references('id')->on('departments');

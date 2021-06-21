@@ -54,12 +54,12 @@ class StudentController extends Controller
     {
         $validated = $request->validated();
 
-        $biodata = Student::updateOrCreate(array_merge(
+        $biodata = Student::updateOrCreate(['email' => $request->email], array_merge(
             $validated,
             [
                 'nisn' => $request->nisn,
                 'name' => $request->name,
-                'email' => $request->email,
+//                'email' => $request->email,
                 'address' => $request->address,
                 'nik' => $request->nik,
                 'place_born' => $request->place_born,

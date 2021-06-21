@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Health;
+use App\Models\SchoolOrigin;
+use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HealthController extends Controller
 {
@@ -14,7 +17,10 @@ class HealthController extends Controller
      */
     public function index()
     {
-        return view('student.health');
+        $id = Auth::id();
+        $student = Student::where(['user_id' => $id])->first();
+        $health = Health::where(['student_id' => $student->id])->first();
+        return view('student.health', compact(['health']));
     }
 
     /**
@@ -35,7 +41,19 @@ class HealthController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $id = Auth::id();
+        $student = Student::where(['user_id' => $id])->first();
+        $imagename = $request->file('photo')->store('upload/student/skl', 'public');
+        $health = Health::updateOrCreate(['student_id' => $student->id], array_merge(
+            [
+                'student_id' => $student->id,
+                'photo' => $imagename,
+                'status' => 0,
+            ],
+        ));
+        //jika data berhasil ditambahkan, akan kembali ke halaman biodata
+        return redirect()->route('student.health')
+            ->with('success', 'Scan Data Kesehatan berhasil diperbarui');
     }
 
     /**

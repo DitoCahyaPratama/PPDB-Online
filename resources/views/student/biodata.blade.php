@@ -39,6 +39,14 @@
                                 <td>{{$student ? $student->gender : ""}}</td>
                             </tr>
                             <tr>
+                                <th>Email</th>
+                                <td>{{$student ? $student->email : ""}}</td>
+                            </tr>
+                            <tr>
+                                <th>No. Telepon</th>
+                                <td>{{$student ? $student->phone_number : ""}}</td>
+                            </tr>
+                            <tr>
                                 <th>Agama</th>
                                 <td>{{$student ? $studentReligion->name : ""}}</td>
                             </tr>
@@ -55,36 +63,29 @@
                                 <td>{{$student ? $student->address : ""}}</td>
                             </tr>
                             <tr>
-                                <th>Desa</th>
-                                <td>{{$student ? ucwords($studentVillage->name) : "" }}</td>
-                            </tr>
-                            <tr>
-                                <th>Kecamatan</th>
-                                <td>{{$student ? ucwords($studentDistrict->name) : ""}}</td>
+                                <th>Provinsi</th>
+                                <td>{{$student ? ucwords($studentProvince->name) : ""}}</td>
                             </tr>
                             <tr>
                                 <th>Kab/Kota</th>
                                 <td>{{$student ? ucwords($studentRegency->name) : ""}}</td>
                             </tr>
                             <tr>
-                                <th>Provinsi</th>
-                                <td>{{$student ? ucwords($studentProvince->name) : ""}}</td>
+                                <th>Kecamatan</th>
+                                <td>{{$student ? ucwords($studentDistrict->name) : ""}}</td>
                             </tr>
                             <tr>
-                                <th>Email</th>
-                                <td>{{$student ? $student->email : ""}}</td>
+                                <th>Desa</th>
+                                <td>{{$student ? ucwords($studentVillage->name) : "" }}</td>
                             </tr>
-                            <tr>
-                                <th>No. Telepon</th>
-                                <td>{{$student ? $student->phone_number : ""}}</td>
-                            </tr>
+
                             </tbody>
                         </table>
                     </div>
                     <div class="col-md-4 col-sm-12">
                         <div class="card text-center" style="padding: 20px">
                             <p>Foto Pribadi</p>
-                            @if($student->photo != null)
+                            @if($student ? $student->photo != null : 0)
                             <img src="{{asset('storage/'.$student->photo)}}" class="card-img-top"  style="width: 100px" alt="..." onclick="perbesar('{{asset('storage/'.$student->photo)}}')">
                             @else
                             <img src="{{asset('student/img/users.png')}}" class="card-img-top" style="width: 100px" alt="..." onclick="perbesar('{{asset('student/img/users.png')}}')">
@@ -106,7 +107,7 @@
                                         <input class="btn btn-danger" name="yt1" type="reset" value="Batal">
                                     </form>
                                     <br>
-                                    {{--                                <a target="_blank" href="/siswa/download/ex/ample/pribadi">Unduh contoh foto pribadi</a>            --}}
+                                    <a target="_blank" href="/siswa/download/ex/ample/pribadi">Unduh contoh foto pribadi</a>
                                 </div>
                             </div>
                         </div>
@@ -193,7 +194,7 @@
                                     <select name="province_id" class="form-control" onchange="loadKab()" id="provinsi" required="">
                                         <option value="">Pilih Provinsi...</option>
                                         @foreach($provinces as $data)
-                                            <option value="{{$data->id}}" {{$student ? ($student->provinces_id == $data->id  ? "selected" : "") : "" }}>{{$data->name}}</option>
+                                            <option value="{{$data->id}}" {{$student ? ($student->province_id == $data->id  ? "selected" : "") : "" }}>{{$data->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -247,9 +248,12 @@
     <script src="{{ asset('student/js/sweetalert.js') }}"></script>
     @if(1)
     <script type="text/javascript">
+        $(document).ready(function(){
+            loadKab();
+        })
         var tampil_biodata = document.getElementById('biodata');
         var edit_biodata = document.getElementById('editBiodata');
-        // loadKab();
+
         function centerModal() {
             $(this).css('display', 'block');
             var $dialog = $(this).find(".modal-dialog");
@@ -286,6 +290,7 @@
                     $("#loading_kota").show();
                 },
                 success:function(data){
+                    console.log(data);
                     $("#loading_kota").hide();
                     $("#kabupaten").removeAttr("disabled");
                     if(data == ""){
