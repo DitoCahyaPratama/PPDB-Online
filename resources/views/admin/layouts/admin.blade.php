@@ -138,6 +138,12 @@
                 Lainnya
             </div>
 
+            <li class="nav-item {{Request::segment(2) == 'info' ? 'active' : null}}">
+                <a class="nav-link" href="{{route('info.home')}}">
+                    <i class="fas fa-fw fa-newspaper"></i>
+                    <span>Info Terkini</span></a>
+            </li>
+
             <li class="nav-item {{Request::segment(2) == 'config' ? 'active' : null}}">
                 <a class="nav-link" href="{{route('config.home')}}">
                     <i class="fas fa-fw fa-key"></i>

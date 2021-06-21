@@ -61,11 +61,13 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('/', [App\Http\Controllers\ConfigController::class, 'index'])->name('config.home');
                 Route::put('/update', [App\Http\Controllers\ConfigController::class, 'update'])->name('config.update');
             });
-            // Route::get('/', [KerjaController::class, 'myjob'])->name('user.jobsaya');
-            // Route::post('/store', [KerjaController::class, 'store']);
-            // Route::get('/get/{id}', [KerjaController::class, 'getById']);
-            // Route::delete('/delete/{id}',[KerjaController::class, 'delete']);
-            // Route::put('/update/{id}', [KerjaController::class, 'update']);
+            Route::prefix('/info')->group(function () {
+                Route::get('/', [App\Http\Controllers\InfoController::class, 'index'])->name('info.home');
+                Route::post('/add', [App\Http\Controllers\InfoController::class, 'store'])->name('info.store');
+                Route::get('/delete/{id}', [App\Http\Controllers\InfoController::class, 'destroy'])->name('info.delete');
+                Route::get('/show/edit/{id}', [App\Http\Controllers\InfoController::class, 'edit'])->name('info.editform');
+                // Route::put('/update', [App\Http\Controllers\ConfigController::class, 'update'])->name('config.update');
+            });
         });
         Route::get('/logoutAdmin',[App\Http\Controllers\Auth\LogoutController::class, 'logoutAdmin']);
     });

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Info;
-use Illuminate\Http\Request;
+use App\Http\Requests\InfoRequest;
+use Illuminate\Support\Str;
 
 class InfoController extends Controller
 {
@@ -13,7 +14,8 @@ class InfoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        return view("info");
+        $info=Info::orderBy('created_at', 'desc')->paginate(5);
+        return view('admin.pages.info_pages',compact('info'));
     }
 
     /**
@@ -24,7 +26,7 @@ class InfoController extends Controller
     public function create()
     {
         //
-        return view('pages.educations.create');
+        // return view('pages.educations.create');
     }
 
     /**
@@ -33,26 +35,33 @@ class InfoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EducationRequest $request)
+    public function store(InfoRequest $request)
     {
-        $validated = $request->validated();
+        try {
+            $validated = $request->validated();
 
-        $image = time().'.'.$request->image->extension();
-        $request->image->move(public_path('uploads/educations'), $image);
+            $image = time().'.'.$request->image->extension();
+            $request->image->move(public_path('img/'), $image);
 
-        $info = Info::create(array_merge(
-            $validated,
-            [
-                'title' => $request->title,
-                'description' => $request->description,
-                'image' => $image,
-                'slug' => Str::slug($request->title),
-            ],
-        ));
+            $info = Info::create(array_merge(
+                $validated,
+                [
+                    'title' => $request->title,
+                    'description' => $request->description,
+                    'image' => $image,
+                    'slug' => Str::slug($request->title),
+                ],
+            ));
 
-        //jika data berhasil ditambahkan, akan kembali ke halaman utama
-        return redirect()->route('education.index')
-            ->with('success', 'Edukasi berhasil ditambahkan');
+            return redirect()->route('info.home')->with([
+                'successful_message' => 'Data telah ditambahkan',
+            ]);
+        } catch (\Throwable $th) {
+            return redirect()->route('info.home')->with([
+                'failed_message' => $th->getMessage(),
+            ]);
+        }
+        
     }
 
     /**
@@ -75,8 +84,8 @@ class InfoController extends Controller
      */
     public function edit($id)
     {
-        $education = Education::find($id);
-        return view('pages.educations.edit', compact('education'));
+        $info = Info::find($id);
+        return view('admin.pages.info_update_pages', compact('info'));
     }
 
     /**
@@ -86,7 +95,7 @@ class InfoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(InfoRequest $request, $id)
     {
         if(!$request->hasFile('image')){
             $validator = Validator::make($request->all(), [
@@ -94,7 +103,7 @@ class InfoController extends Controller
                 'description' => 'required',
             ]);
             //fungsi eloquent untuk update data
-            $education = Education::find($id)->update(array_merge(
+            $education = Info::find($id)->update(array_merge(
                 $validator->validated(),
                 [
                     'title' => $request->title,
@@ -150,9 +159,17 @@ class InfoController extends Controller
      */
     public function destroy($id)
     {
-        Education::find($id)->delete();
-        return redirect()->route('education.index')
-            -> with('success', 'Edukasi berhasil dihapus');
+        try {
+            Info::find($id)->delete();
+            return redirect()->route('info.home')->with([
+                'successful_message' => 'Data berhasil dihapus',
+            ]);
+        } catch (\Throwable $th) {
+            return redirect()->route('info.home')->with([
+                'failed_message' => $th->getMessage(),
+            ]);
+        }
+        
     }
 
     public function publicView(){
