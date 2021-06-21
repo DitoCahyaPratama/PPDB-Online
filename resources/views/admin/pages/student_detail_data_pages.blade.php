@@ -19,7 +19,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-6">
-                    <center><img src="{{asset($studentData->photo)}}" class="img-fluid" style="width: 80%"></center>
+                    <center><img src="{{asset('storage/'.$studentData->photo)}}" class="img-fluid" style="width: 80%"></center>
                 </div>
                 <div class="col-lg-6">
                     <h5><b>Data Umum</b></h5>

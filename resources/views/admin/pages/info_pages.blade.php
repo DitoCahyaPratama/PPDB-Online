@@ -50,10 +50,16 @@
                     <tr>
                         {{-- <td>{{$no++}}</td> --}}
                         <td>{{$infos->title}}</td>
-                        <td style="width: 30%"><img src="{{asset('img/'.$infos->image)}}" class="img-fluid" style="width: 50%"></td>
+                        <td style="width: 30%">
+                            @if ($infos->image == null)
+                                <img src="{{asset('img/imgnotfound.png')}}" class="img-fluid" style="width: 50%">    
+                            @else
+                            <img src="{{asset('storage/'.$infos->image)}}" class="img-fluid" style="width: 50%">
+                            @endif
+                        </td>
                         <td>
                             <a href="{{route('info.delete',['id'=>$infos->id])}}" class="btn btn-danger" onclick="return confirm('Hapus info ini ?')">Hapus</a>
-                            <a href="#" class="btn btn-warning">Detail</a>
+                            <a href="{{route('info.detail',['id'=>$infos->id])}}" class="btn btn-warning">Detail</a>
                             <a href="{{route('info.editform',['id'=>$infos->id])}}" class="btn btn-success">Edit</a>
                         </td>
                     </tr>

@@ -17,7 +17,7 @@ class CreateInfosTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('slug');
             $table->timestamps();
         });

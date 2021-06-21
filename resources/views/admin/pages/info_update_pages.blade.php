@@ -18,8 +18,9 @@
         <h6 class="m-0 font-weight-bold text-primary">Edit Info</h6>
     </div>
     <div class="card-body">
-        <form action="" method="POST">
+        <form action="{{route('info.update',['id'=>$info['id']])}}" method="POST" enctype="multipart/form-data">
             @csrf
+            
             <div class="form-group">
                 <label>Judul</label>
                 <input type="text" name="title" class="form-control" value="{{$info['title']}}">
@@ -37,7 +38,7 @@
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <img src="{{asset('img/'.$info['image'])}}">
+                <img src="{{asset('storage/'.$info['image'])}}" class="img-fluid">
             </div>
         </div>
             </div>

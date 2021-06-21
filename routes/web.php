@@ -65,8 +65,9 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('/', [App\Http\Controllers\InfoController::class, 'index'])->name('info.home');
                 Route::post('/add', [App\Http\Controllers\InfoController::class, 'store'])->name('info.store');
                 Route::get('/delete/{id}', [App\Http\Controllers\InfoController::class, 'destroy'])->name('info.delete');
+                Route::get('/show/{id}', [App\Http\Controllers\InfoController::class, 'show'])->name('info.detail');
                 Route::get('/show/edit/{id}', [App\Http\Controllers\InfoController::class, 'edit'])->name('info.editform');
-                // Route::put('/update', [App\Http\Controllers\ConfigController::class, 'update'])->name('config.update');
+                Route::post('/update/{id}', [App\Http\Controllers\InfoController::class, 'update'])->name('info.update');
             });
         });
         Route::get('/logoutAdmin',[App\Http\Controllers\Auth\LogoutController::class, 'logoutAdmin']);
