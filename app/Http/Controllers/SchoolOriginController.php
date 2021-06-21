@@ -25,10 +25,10 @@ class SchoolOriginController extends Controller
         $student = Student::where(['user_id' => $id])->first();
         $schoolorigin = SchoolOrigin::where(['student_id' => $student->id])->first();
         $provinces = Province::all();
-        $schooloriginVillage = Village::find($schoolorigin->village_id);
-        $schooloriginDistrict = District::find($schoolorigin->district_id);
-        $schooloriginRegency = Regency::find($schoolorigin->regency_id);
-        $schooloriginProvince = Province::find($schoolorigin->province_id);
+        $schooloriginVillage = $schoolorigin ? Village::find($schoolorigin->village_id) : "";
+        $schooloriginDistrict = $schoolorigin ? District::find($schoolorigin->district_id) : "";
+        $schooloriginRegency = $schoolorigin ? Regency::find($schoolorigin->regency_id) : "";
+        $schooloriginProvince = $schoolorigin ? Province::find($schoolorigin->province_id) : "";
         return view('student.schoolOrigin', compact(['schoolorigin', 'provinces', 'schooloriginVillage', 'schooloriginDistrict', 'schooloriginRegency', 'schooloriginProvince']));
     }
 
@@ -50,7 +50,27 @@ class SchoolOriginController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $id = Auth::id();
+        $student = Student::where(['user_id' => $id])->first();
+        $validated = $request->validated();
+        $schoolOrigin = SchoolOrigin::updateOrCreate(array_merge(
+            $validated,
+            [
+                'student_id' => $student->id,
+                'name' => $request->name,
+                'address' => $request->address,
+                'graduation_year' => $request->graduation_year,
+                'village_id' => $request->village_id,
+                'district_id' => $request->district_id,
+                'regency_id' => $request->regency_id,
+                'province_id' => $request->province_id,
+                'type' => $request->type,
+            ],
+        ));
+
+        //jika data berhasil ditambahkan, akan kembali ke halaman biodata
+        return redirect()->route('student.biodata')
+            ->with('success', 'Biodata berhasil diperbarui');
     }
 
     /**

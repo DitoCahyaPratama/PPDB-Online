@@ -82,29 +82,25 @@
                         </table>
                     </div>
                     <div class="col-md-4 col-sm-12">
-                        <div class="card" style="padding: 20px">
+                        <div class="card text-center" style="padding: 20px">
                             <p>Foto Pribadi</p>
-                            <?php
-                            //                        if($data['photo']){
-                            ?>
-                            {{--                        <img src="temp/image/pribadi/<?php echo $data['photo'] ?>" class="card-img-top" style="" alt="..." onclick="perbesar('temp/image/pribadi/<?php echo $data['photo'] ?>')">--}}
-                            <?php
-                            //                        }else{
-                            ?>
-                            <img src="{{asset('student/img/users.png')}}" class="card-img-top" style="" alt="..." onclick="perbesar('{{asset('student/img/users.png')}}')">
-                            <?php
-                            //                        }
-                            ?>
+                            @if($student->photo != null)
+                            <img src="{{asset('storage/'.$student->photo)}}" class="card-img-top"  style="width: 100px" alt="..." onclick="perbesar('{{asset('storage/'.$student->photo)}}')">
+                            @else
+                            <img src="{{asset('student/img/users.png')}}" class="card-img-top" style="width: 100px" alt="..." onclick="perbesar('{{asset('student/img/users.png')}}')">
+                            @endif
+                            <br/>
                             <small>*Klik gambar untuk memperbesar</small>
 
                             <hr>
                             <div class="card-body">
                                 <p style="text-align: center; color: red">Perbarui Foto Pribadi</p>
                                 <div class="form well">
-                                    <form enctype="multipart/form-data" action="server.php?p=uploadFotoBiodata" method="post">
+                                    <form enctype="multipart/form-data" action="{{route('student.uploadPhoto')}}" method="post">
+                                        @csrf
                                         <div class="row">
                                             <a class="file-input-wrapper btn styled-file btn btn-block">Pilih file foto pribadi
-                                                <input class="styled-file btn btn-block" name="foto" type="file" title="Pilih file foto pribadi" style="left: -130.25px; top: 15.8906px;"></a>
+                                                <input class="styled-file btn btn-block" name="photo" type="file" title="Pilih file foto pribadi" style="left: -130.25px; top: 15.8906px;"></a>
                                         </div>
                                         <input class="btn btn-info" type="submit" name="yt0" value="Simpan">
                                         <input class="btn btn-danger" name="yt1" type="reset" value="Batal">
@@ -229,7 +225,7 @@
                             <div style="border: dotted; padding: 20px; margin: 10px; margin-top: 30px">
                                 <div class="form-group">
                                     <label for="email">Email <span class="required">*</span></label>
-                                    <input type="email" class="form-control" name="email" placeholder="Email ..." required="" value="{{$student ? $student->email : ""}}">
+                                    <input type="email" class="form-control" name="email" placeholder="Email ..." required="" value="{{$email}}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="phone_number">No. Telepon</label>

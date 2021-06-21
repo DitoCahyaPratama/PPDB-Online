@@ -22,6 +22,7 @@ class StudentController extends Controller
     public function index()
     {
         $id = Auth::id();
+        $email = Auth::user()->email;
         $student = Student::where(['user_id' => $id])->first();
         $provinces = Province::all();
         $religions = Religion::all();
@@ -30,7 +31,7 @@ class StudentController extends Controller
         $studentDistrict = $student ? District::find($student->district_id) : "";
         $studentRegency = $student ? Regency::find($student->regency_id) : "";
         $studentProvince = $student ? Province::find($student->province_id) : "";
-        return view('student.biodata', compact(['student', 'provinces', 'religions', 'studentReligion', 'studentVillage', 'studentDistrict', 'studentRegency', 'studentProvince']));
+        return view('student.biodata', compact(['student', 'provinces', 'religions', 'studentReligion', 'studentVillage', 'studentDistrict', 'studentRegency', 'studentProvince', 'email']));
     }
 
     /**
@@ -74,7 +75,7 @@ class StudentController extends Controller
             ],
         ));
 
-        //jika data berhasil ditambahkan, akan kembali ke halaman utama
+        //jika data berhasil ditambahkan, akan kembali ke halaman biodata
         return redirect()->route('student.biodata')
             ->with('success', 'Biodata berhasil diperbarui');
     }
@@ -122,6 +123,20 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         //
+    }
+
+    public function uploadPhoto(Request $request){
+        $id = Auth::id();
+        $student = Student::where(['user_id' => $id])->first();
+        $imagename = $request->file('photo')->store('upload/student/profile', 'public');
+        $biodata = Student::find($student->id)->update(array_merge(
+            [
+                'photo' => $imagename,
+            ],
+        ));
+        //jika data berhasil ditambahkan, akan kembali ke halaman biodata
+        return redirect()->route('student.biodata')
+            ->with('success', 'Photo profile berhasil diperbarui');
     }
 
     public function cetak_pendaftaran(){
