@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class HealthController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('studentVerify');
+        $this->middleware('dateVerifyHealth');
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Auth;
 
 class AchievementController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('studentVerify');
+        $this->middleware('dateVerifyAchievement');
+        $this->middleware('finalVerifyAchievement');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -169,7 +177,7 @@ class AchievementController extends Controller
         ));
 
         //jika data berhasil ditambahkan, akan kembali ke halaman biodata
-        return redirect()->route('student.dashboard')
+        return redirect()->route('dashboard.student')
             ->with('success', 'Prestasi berhasil difinalisasi');
     }
 }

@@ -10,8 +10,9 @@ class SelectionReport extends Model
     use HasFactory;
     protected $table='selection_reports';
     protected $fillable = [
+        'student_id',
         'report_id',
-        'departement_id',
+        'department_id',
         'avg',
         'status',
     ];

@@ -9,6 +9,30 @@ use Illuminate\Support\Str;
 
 class InfoController extends Controller
 {
+    public function publicIndex(){
+        $info = Info::orderBy('created_at', 'desc')->paginate(5);
+        return view('info',compact('info'));
+    }
+
+    public function publicDetail($id){
+        $info = Info::where('slug','=',$id)->get()->first();
+        return view('info-detail',compact('info'));
+    }
+
+    public function publicSearch(Request $request){
+        // Get the search value from the request
+        $search = $request->input('search');
+
+        // Search in the title and body columns from the posts table
+        $info = Info::query()
+            ->where('title', 'LIKE', "%{$search}%")
+            ->paginate(5);
+
+        $info->appends($request->only(['_token', 'search']));
+
+        // Return the search view with the resluts compacted
+        return view('info', compact('info'));
+    }
     /**
      * Display a listing of the resource.
      *
@@ -59,7 +83,7 @@ class InfoController extends Controller
                 'failed_message' => $th->getMessage(),
             ]);
         }
-        
+
     }
 
     /**
@@ -114,10 +138,10 @@ class InfoController extends Controller
                 $allowedfileExtension = ['jpg', 'png', 'jpeg', 'svg'];
                 $file = $request->file('image');
                 $validated = $request->validated();
-    
+
                 $extension = $file->getClientOriginalExtension();
                 $check = in_array($extension, $allowedfileExtension);
-    
+
                 if ($check) {
                     $imagename = $request->file('image')->store('upload/info', 'public');
                     $education = Info::find($id)->update(array_merge(
@@ -129,7 +153,7 @@ class InfoController extends Controller
                             'slug' => Str::slug($request->title),
                         ],
                     ));
-    
+
                     return redirect()->route('info.home')->with([
                         'successful_message' => 'Data telah diperbarui',
                     ]);
@@ -144,7 +168,7 @@ class InfoController extends Controller
                 'failed_message' => $th->getMessage(),
             ]);
         }
-        
+
     }
 
     /**
@@ -165,7 +189,7 @@ class InfoController extends Controller
                 'failed_message' => $th->getMessage(),
             ]);
         }
-        
+
     }
 
     public function search(Request $request){

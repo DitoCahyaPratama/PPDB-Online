@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Auth;
 
 class SchoolOriginController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('studentVerify');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,13 +29,24 @@ class SchoolOriginController extends Controller
     {
         $id = Auth::id();
         $student = Student::where(['user_id' => $id])->first();
-        $schoolorigin = SchoolOrigin::where(['student_id' => $student->id])->first();
-        $provinces = Province::all();
-        $schooloriginVillage = $schoolorigin ? Village::find($schoolorigin->village_id) : "";
-        $schooloriginDistrict = $schoolorigin ? District::find($schoolorigin->district_id) : "";
-        $schooloriginRegency = $schoolorigin ? Regency::find($schoolorigin->regency_id) : "";
-        $schooloriginProvince = $schoolorigin ? Province::find($schoolorigin->province_id) : "";
-        return view('student.schoolOrigin', compact(['schoolorigin', 'provinces', 'schooloriginVillage', 'schooloriginDistrict', 'schooloriginRegency', 'schooloriginProvince']));
+        if($student != null){
+            $schoolorigin = SchoolOrigin::where(['student_id' => $student->id])->first();
+            $provinces = Province::all();
+            $schooloriginVillage = $schoolorigin ? Village::find($schoolorigin->village_id) : "";
+            $schooloriginDistrict = $schoolorigin ? District::find($schoolorigin->district_id) : "";
+            $schooloriginRegency = $schoolorigin ? Regency::find($schoolorigin->regency_id) : "";
+            $schooloriginProvince = $schoolorigin ? Province::find($schoolorigin->province_id) : "";
+            return view('student.schoolOrigin', compact(['schoolorigin', 'provinces', 'schooloriginVillage', 'schooloriginDistrict', 'schooloriginRegency', 'schooloriginProvince']));
+        }else{
+            $schoolorigin = array();
+            $provinces = array();
+            $schooloriginVillage = array();
+            $schooloriginDistrict = array();
+            $schooloriginRegency = array();
+            $schooloriginProvince = array();
+            return view('student.schoolOrigin', compact(['schoolorigin', 'provinces', 'schooloriginVillage', 'schooloriginDistrict', 'schooloriginRegency', 'schooloriginProvince']));
+        }
+
     }
 
     /**
@@ -46,7 +62,7 @@ class SchoolOriginController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(SchoolOriginRequest $request)
@@ -77,7 +93,7 @@ class SchoolOriginController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -88,7 +104,7 @@ class SchoolOriginController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -99,8 +115,8 @@ class SchoolOriginController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -111,7 +127,7 @@ class SchoolOriginController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -119,7 +135,8 @@ class SchoolOriginController extends Controller
         //
     }
 
-    public function uploadSkl(Request $request){
+    public function uploadSkl(Request $request)
+    {
         $id = Auth::id();
         $student = Student::where(['user_id' => $id])->first();
         $imagename = $request->file('photo')->store('upload/student/skl', 'public');

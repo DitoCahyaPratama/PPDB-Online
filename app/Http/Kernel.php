@@ -63,5 +63,11 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'role' => \App\Http\Middleware\RoleMiddleware::class,
+        'studentVerify' => \App\Http\Middleware\StudentVerifyMiddleware::class,
+        'dateVerifyHealth' => \App\Http\Middleware\DateVerifyHealthMiddleware::class,
+        'dateVerifyAchievement' => \App\Http\Middleware\DateVerifyAchievementMiddleware::class,
+        'dateVerifyReport' => \App\Http\Middleware\DateVerifyReportMiddleware::class,
+        'finalVerifyAchievement' => \App\Http\Middleware\FinalVerifyAchievementMiddleware::class,
+        'finalVerifyReport' => \App\Http\Middleware\FinalVerifyReportMiddleware::class,
     ];
 }

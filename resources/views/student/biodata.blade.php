@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="pb-4 mb-4">
+    <div class="registration-page-area bg-secondary">
         <section class="show" id="biodata">
             <div class="container">
                 <ul class="breadcrumb">

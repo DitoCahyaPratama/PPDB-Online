@@ -5,50 +5,34 @@
     <div class="inner-page-banner-area" style="background-image: url('{{asset('student/img/banner/5.jpg')}}');">
         <div class="container">
             <div class="pagination-area">
-                <h1>Info Terkini</h1>
+                <h1>Info Details</h1>
                 <ul>
                     <li><a href="/">Home</a> -</li>
-                    <li>Info Terkini</li>
+                    <li>Details</li>
                 </ul>
             </div>
         </div>
     </div>
     <!-- Inner Page Banner Area End Here -->
-    <!-- News Page Area Start Here -->
-    <div class="news-page-area">
+    <!-- News Details Page Area Start Here -->
+    <div class="news-details-page-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
-                    <div class="row">
-                        @if(count($info) > 0)
-                            @foreach($info as $data)
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="news-box">
-                                        <div class="news-img-holder">
-                                            <img src="{{asset('storage/'.$data->image)}}" class="img-responsive" alt="research">
-                                            <ul class="news-date1">
-                                                <li>{{date('d M', strtotime($data->created_at))}}</li>
-                                                <li>{{date('Y', strtotime($data->created_at))}}</li>
-                                            </ul>
-                                        </div>
-                                        <h2 class="title-default-left-bold"><a href="#">{{ $data->title }}</a></h2>
-                                        <ul class="title-bar-high news-comments">
-                                            <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i><span>By</span> Admin</a></li>
-                                        </ul>
-                                        <p>{{ substr($data->description, 0, 300) }} ...</p>
-                                        <a href="{{route('info.details', $data->slug)}}" class="default-big-btn">Read MOre</a>
-                                    </div>
-                                </div>
-                            @endforeach
-                        @else
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <p>Tidak ada info</p>
-                            </div>
-                        @endif
-
-
+                    <div class="row news-details-page-inner">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            {{ $info->links('vendor.pagination.custom') }}
+                            <div class="news-img-holder">
+                                <img src="{{asset('storage/'.$info->image)}}" class="img-responsive" alt="research">
+                                <ul class="news-date1">
+                                    <li>{{date('d M', strtotime($info->created_at))}}</li>
+                                    <li>{{date('Y', strtotime($info->created_at))}}</li>
+                                </ul>
+                            </div>
+                            <h2 class="title-default-left-bold-lowhight"><a href="#">How To Build HTML To WordPress Site?</a></h2>
+                            <ul class="title-bar-high news-comments">
+                                <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i><span>By</span> Admin</a></li>
+                            </ul>
+                            <p>{{$info->description}}</p>
                         </div>
                     </div>
                 </div>

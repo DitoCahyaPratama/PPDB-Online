@@ -14,9 +14,9 @@
                                 <p>Mengisi/melengkapi biodata siswa</p>
                                 <small><i>wajib diisi</i></small>
                                 @if($verifyBiodata)
-                                <span class="label label-success">Data sudah lengkap</span>
+                                    <span class="label label-success">Data sudah lengkap</span>
                                 @else
-                                <span class="label label-warning">Data belum lengkap</span>
+                                    <span class="label label-warning">Data belum lengkap</span>
                                 @endif
                             </div>
                         </a>
@@ -44,7 +44,8 @@
                                         <span class="label label-warning">Data belum lengkap</span>
                                     @endif
                                 @else
-                                    <small><i>{{date('d/m/Y', strtotime($config->date_registration_selection_health_start))}} - {{date('d/m/Y', strtotime($config->date_registration_selection_health_end))}}</i></small>
+                                    <small><i>{{date('d/m/Y', strtotime($config->date_registration_selection_health_start))}}
+                                            - {{date('d/m/Y', strtotime($config->date_registration_selection_health_end))}}</i></small>
                                 @endif
 
                             </div>
@@ -60,7 +61,8 @@
                                         <span class="label label-warning">Data belum lengkap</span>
                                     @endif
                                 @else
-                                    <small><i>{{date('d/m/Y', strtotime($config->date_registration_selection_achievement_start))}} - {{date('d/m/Y', strtotime($config->date_registration_selection_achievement_end))}}</i></small>
+                                    <small><i>{{date('d/m/Y', strtotime($config->date_registration_selection_achievement_start))}}
+                                            - {{date('d/m/Y', strtotime($config->date_registration_selection_achievement_end))}}</i></small>
                                 @endif
                             </div>
                         </a>
@@ -75,7 +77,8 @@
                                         <span class="label label-warning">Data belum lengkap</span>
                                     @endif
                                 @else
-                                    <small><i>{{date('d/m/Y', strtotime($config->date_registration_selection_report_start))}} - {{date('d/m/Y', strtotime($config->date_registration_selection_report_end))}}</i></small>
+                                    <small><i>{{date('d/m/Y', strtotime($config->date_registration_selection_report_start))}}
+                                            - {{date('d/m/Y', strtotime($config->date_registration_selection_report_end))}}</i></small>
                                 @endif
                             </div>
                         </a>
@@ -114,9 +117,12 @@
                     <div class="card" style="width: 18rem;">
                         <div class="card-body text-center">
                             @if($verifyBiodata ? $verifyBiodata->photo != null : 0)
-                                <img src="{{asset('storage/'.$verifyBiodata->photo)}}" class="card-img-top"  style="width: 100px" alt="..." onclick="perbesar('{{asset('storage/'.$verifyBiodata->photo)}}')">
+                                <img src="{{asset('storage/'.$verifyBiodata->photo)}}" class="card-img-top"
+                                     style="width: 100px" alt="..."
+                                     onclick="perbesar('{{asset('storage/'.$verifyBiodata->photo)}}')">
                             @else
-                                <img src="{{asset('student/img/users.png')}}" class="card-img-top" style="width: 100px" alt="..." onclick="perbesar('{{asset('student/img/users.png')}}')">
+                                <img src="{{asset('student/img/users.png')}}" class="card-img-top" style="width: 100px"
+                                     alt="..." onclick="perbesar('{{asset('student/img/users.png')}}')">
                             @endif
                             <h6 class="card-subtitle mb-2 text-muted">{{$email}}</h6>
                             <h6 class="card-subtitle mb-2 text-muted">{{$no_daftar}}</h6>
@@ -129,34 +135,42 @@
                             <ul>
                                 <li>Nama Sekolah : <b>{{$config->name_school}}</b></li>
                                 <li>Alamat Sekolah : <b>{{$config->address_school}}</b></li>
-                                <li>Tanggal upload data kesehatan : <b>{{date('d/m/Y', strtotime($config->date_registration_selection_health_start))}} - {{date('d/m/Y', strtotime($config->date_registration_selection_health_end))}}</b></li>
-                                <li>Tanggal daftar jalur prestasi: <b>{{date('d/m/Y', strtotime($config->date_registration_selection_achievement_start))}} - {{date('d/m/Y', strtotime($config->date_registration_selection_achievement_end))}}</b></li>
-                                <li>Tanggal daftar jalur rapot : <b>{{date('d/m/Y', strtotime($config->date_registration_selection_report_start))}} - {{date('d/m/Y', strtotime($config->date_registration_selection_report_end))}}</b></li>
-                                <li>Tanggal pengumuman jalur prestasi : <b>{{date('d/m/Y', strtotime($config->date_announcement_achievement_start))}} - {{date('d/m/Y', strtotime($config->date_announcement_achievement_end))}}</b></li>
-                                <li>Tanggal pengumuman jalur rapot : <b>{{date('d/m/Y', strtotime($config->date_announcement_report_start))}} - {{date('d/m/Y', strtotime($config->date_announcement_report_end))}}</b></li>
+                                <li>Tanggal upload data kesehatan :
+                                    <b>{{date('d/m/Y', strtotime($config->date_registration_selection_health_start))}}
+                                        - {{date('d/m/Y', strtotime($config->date_registration_selection_health_end))}}</b>
+                                </li>
+                                <li>Tanggal daftar jalur prestasi:
+                                    <b>{{date('d/m/Y', strtotime($config->date_registration_selection_achievement_start))}}
+                                        - {{date('d/m/Y', strtotime($config->date_registration_selection_achievement_end))}}</b>
+                                </li>
+                                <li>Tanggal daftar jalur rapot :
+                                    <b>{{date('d/m/Y', strtotime($config->date_registration_selection_report_start))}}
+                                        - {{date('d/m/Y', strtotime($config->date_registration_selection_report_end))}}</b>
+                                </li>
+                                <li>Tanggal pengumuman jalur prestasi :
+                                    <b>{{date('d/m/Y', strtotime($config->date_announcement_achievement_start))}}
+                                        - {{date('d/m/Y', strtotime($config->date_announcement_achievement_end))}}</b>
+                                </li>
+                                <li>Tanggal pengumuman jalur rapot :
+                                    <b>{{date('d/m/Y', strtotime($config->date_announcement_report_start))}}
+                                        - {{date('d/m/Y', strtotime($config->date_announcement_report_end))}}</b></li>
                             </ul>
                         </div>
-                        <div class="alert alert-success" role="alert">
-                            <ul>
-                                {{--                                <li>Selamat anda diterima di program studi <?php echo $dataRegistrasi['name'] ?></li>--}}
-                                <?php
-                                //                                if($dataRegistrasi['photo'] && $dataRegistrasi['status'] == '0'){
-                                echo '<li>Harap menunggu maksimal 24 jam untuk proses registrasi.</li>';
-                                //                                }else if($dataRegistrasi['photo'] && $dataRegistrasi['status'] == '1'){
-                                echo '<li>Anda sudah dikonfirmasi dan harap membawa berkas-berkas ke unisma malang pada tanggal 30 juni 2019.</li>';
-                                //                                }else{
-                                echo '<li>Harap melakukan registrasi pada menu registrasi</li>';
-                                //                                }
-                                ?>
-                            </ul>
-                            <?php
-                            //                            }else{
-                            ?>
-                            Mohon Maaf anda tidak diterima
-                            <?php
-                            //                            }
-                            ?>
-                        </div>
+                        @if($verifyBiodata != null && (count($verifyJurusan1) > 0 || count($verifyJurusan2) > 0))
+                            <div class="alert alert-success" role="alert">
+                                <ul>
+                                    @if($verifyJurusan1[0]->status == 0 || $verifyJurusan2[0]->status == 0)
+                                        <li>Harap menunggu maksimal 24 jam untuk proses registrasi.</li>
+                                    @elseif($verifyJurusan1[0]->status == 1 || $verifyJurusan2[0]->status == 1)
+                                        <li>Selamat anda diterima di jurusan {{}}</li>
+                                    @elseif($verifyJurusan1[0]->status == 2 || $verifyJurusan2[0]->status == 2)
+                                        <li>Mohon Maaf anda tidak diterima</li>
+                                    @else
+                                    @endif
+                                </ul>
+                            </div>
+                        @endif
+
                     </div>
                 </div>
             </div>

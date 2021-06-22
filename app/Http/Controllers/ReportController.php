@@ -6,12 +6,21 @@ use App\Http\Requests\ReportRequest;
 use App\Models\Achievement;
 use App\Models\Department;
 use App\Models\Report;
+use App\Models\SelectionAchievement;
+use App\Models\SelectionReport;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('studentVerify');
+        $this->middleware('dateVerifyReport');
+        $this->middleware('finalVerifyReport');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -109,5 +118,26 @@ class ReportController extends Controller
     public function destroy(Report $report)
     {
         //
+    }
+
+    public function final(Request $request)
+    {
+        $id = Auth::id();
+        $student = Student::where(['user_id' => $id])->first();
+        $report = Report::where(['student_id' => $student->id])->first();
+        $avg = ($report->agama + $report->pkn + $report->bi + $report->mtk + $report->ipa + $report->ips + $report->bing) / 7;
+        $biodata = SelectionReport::updateOrCreate(array_merge(
+            [
+                'student_id' => $student->id,
+                'report_id' => $report->id,
+                'department_id' => $request->department_id,
+                'avg' => $avg,
+                'status' => 0,
+            ],
+        ));
+
+        //jika data berhasil ditambahkan, akan kembali ke halaman biodata
+        return redirect()->route('dashboard.student')
+            ->with('success', 'Prestasi berhasil difinalisasi');
     }
 }
