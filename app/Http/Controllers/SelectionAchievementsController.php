@@ -88,7 +88,7 @@ class SelectionAchievementsController extends Controller
         try {
             $countAccept=SelectionAchievement::where('department_id','=',$departementId)->where('status','=',1)->count();
             if ($status == 1) {
-                if ($countAccept == 0) {
+                if ($countAccept == 50) {
                     return redirect()->route('selectionachievement.home',['departementId'=>$departementId])->with([
                         'failed_message' => 'Kuota sudah sudah penuh',
                     ]);
