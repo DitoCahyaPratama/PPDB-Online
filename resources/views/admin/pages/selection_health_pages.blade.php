@@ -36,7 +36,7 @@
                         <tr>
                             <td>{{ $no++ }}</td>    
                             <td>{{ $healthDatas->student->name }}</td>    
-                            <td style="width: 30%"><center><img src="{{ asset($healthDatas->photo) }}" class="img-fluid" width="50%"></center></td>    
+                            <td style="width: 30%"><center><img src="{{ asset('storage/'.$healthDatas->photo) }}" class="img-fluid" width="50%"></center></td>    
                             <td>
                                 @if ($healthDatas->status == 0)
                                     <h6>Belum Terdapat Status</h6>
