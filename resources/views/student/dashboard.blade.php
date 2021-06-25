@@ -39,7 +39,12 @@
                                 @if($config->date_registration_selection_health_start <= date('Y-m-d') && $config->date_registration_selection_health_end >= date('Y-m-d'))
                                     <small><i>wajib diisi</i></small>
                                     @if(count($verifyHealth))
-                                        <span class="label label-success">Data sudah lengkap</span>
+                                        @if($verifyHealth[0]->status == 1)
+                                            <span class="label label-success">Data sudah lengkap & sudah terverifikasi</span>
+                                        @else
+                                            <span class="label label-warning">Data sudah lengkap & belum terverifikasi</span>
+                                        @endif
+
                                     @else
                                         <span class="label label-warning">Data belum lengkap</span>
                                     @endif
